@@ -87,7 +87,7 @@ input {
     background: #7dd3fc;
 }
 
-/* ELEMENTOS COMPARTILHADOS: LOGIN E CADASTRO */
+/* FRONT COMPARTILHADOS: LOGIN E CADASTRO */
 
 .auth-container {
     width: min(100%, 430px);
