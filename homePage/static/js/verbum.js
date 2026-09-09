@@ -1,6 +1,4 @@
-// ==================================================
 // MOSTRAR OU OCULTAR A SENHA
-// ==================================================
 
 const password = document.querySelector("#password");
 const togglePassword = document.querySelector("#toggle-password");
@@ -36,10 +34,7 @@ if (password && togglePassword) {
   });
 }
 
-
-// ==================================================
 // CONFIRMAÇÃO DA SENHA NO CADASTRO
-// ==================================================
 
 const passwordConfirmation = document.querySelector(
   "#password_confirmation"
@@ -73,10 +68,7 @@ if (password && passwordConfirmation) {
   );
 }
 
-
-// ==================================================
 // EVITAR VÁRIOS ENVIOS DO MESMO FORMULÁRIO
-// ==================================================
 
 const forms = document.querySelectorAll("form");
 
@@ -112,9 +104,7 @@ forms.forEach((form) => {
 });
 
 
-// ==================================================
 // BOTÃO PARA INICIAR UMA ATIVIDADE
-// ==================================================
 
 const startLesson = document.querySelector("#start-lesson");
 

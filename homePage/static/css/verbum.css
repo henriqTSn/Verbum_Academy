@@ -87,9 +87,7 @@ input {
     background: #7dd3fc;
 }
 
-/* ==================================================
-   ELEMENTOS COMPARTILHADOS: LOGIN E CADASTRO
-================================================== */
+/* ELEMENTOS COMPARTILHADOS: LOGIN E CADASTRO */
 
 .auth-container {
     width: min(100%, 430px);
@@ -166,9 +164,7 @@ input {
     transform: translateY(-2px);
 }
 
-/* ==================================================
-   PÁGINA DE LOGIN
-================================================== */
+/* PÁGINA DE LOGIN */
 
 .login-layout {
     min-height: 100vh;
@@ -381,9 +377,7 @@ input {
     border-radius: 10px;
 }
 
-/* ==================================================
-   PÁGINA DE CADASTRO
-================================================== */
+/* PÁGINA DE CADASTRO */
 
 .register-page {
     min-height: 100vh;
@@ -544,9 +538,78 @@ input {
     font-weight: bold;
 }
 
-/* ==================================================
-   PAINEL PRINCIPAL
-================================================== */
+/* TELA DE REDEFINIÇÃO DE SENHA */
+
+.password-reset-page {
+    min-height: 100vh;
+    margin: 0;
+    padding: 32px;
+
+    display: grid;
+    place-items: center;
+
+    background:
+        radial-gradient(
+            circle at bottom right,
+            rgba(125, 211, 252, 0.12),
+            transparent 35%
+        ),
+        #0f172a;
+}
+
+.password-reset-card {
+    width: 100%;
+}
+
+.password-reset-card .subtext {
+    margin-bottom: 24px;
+}
+
+.reset-field label {
+    margin-top: 0;
+}
+
+.reset-field + .reset-field {
+    margin-top: 18px;
+}
+
+.reset-message {
+    margin-bottom: 20px;
+    padding: 12px 14px;
+
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.reset-error {
+    color: #fecaca;
+    background: rgba(239, 68, 68, 0.12);
+    border-left: 4px solid #ef4444;
+}
+
+.reset-message p,
+.reset-field-error p {
+    margin: 0;
+}
+
+.reset-message p + p,
+.reset-field-error p + p {
+    margin-top: 6px;
+}
+
+.reset-field-error {
+    margin-top: 7px;
+    color: #fecaca;
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.password-reset-card .register {
+    margin-bottom: 0;
+}
+
+/* PAINEL PRINCIPAL */
 
 .app-layout {
     min-height: 100vh;
@@ -789,9 +852,7 @@ input {
     font-size: 14px;
 }
 
-/* ==================================================
-   RESPONSIVIDADE
-================================================== */
+/* RESPONSIVIDADE */
 
 @media (max-width: 800px) {
     .login-layout {
@@ -862,6 +923,10 @@ input {
 
 @media (max-width: 480px) {
     .register-page {
+        padding: 24px 16px;
+    }
+
+    .password-reset-page {
         padding: 24px 16px;
     }
 

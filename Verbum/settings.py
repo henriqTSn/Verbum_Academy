@@ -128,9 +128,6 @@ MAILERS = {
     },
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-DEFAULT_FROM_EMAIL = 'noreply@verbum.local'
-
 # Configuração de sessão
 # A sessão expira após 30 minutos de inatividade
 SESSION_COOKIE_AGE = 1800
