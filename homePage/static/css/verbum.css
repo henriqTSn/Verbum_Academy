@@ -608,7 +608,31 @@ input {
 .password-reset-card .register {
     margin-bottom: 0;
 }
+/* TELA DE AUTENTICAÇÃO EM DOIS FATORES (2FA) */
 
+.two-factor-card .subtext {
+    margin-bottom: 24px;
+}
+
+.two-factor-code {
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 10px;
+    text-align: center;
+}
+
+.two-factor-error {
+    margin-bottom: 18px;
+    padding: 12px 14px;
+
+    color: #fecaca;
+    background: rgba(239, 68, 68, 0.12);
+    border-left: 4px solid #ef4444;
+    border-radius: 10px;
+
+    font-size: 14px;
+    line-height: 1.5;
+}
 /* PAINEL PRINCIPAL */
 
 .app-layout {
@@ -941,5 +965,31 @@ input {
     .auth-brand {
         font-size: 30px;
         letter-spacing: 6px;
+    }
+}
+
+/* FUNDO DA TELA DE AUTENTICAÇÃO */
+
+body.auth-page {
+    min-height: 100vh;
+    margin: 0;
+    padding: 32px;
+
+    display: grid;
+    place-items: center;
+
+    background:
+        radial-gradient(
+            circle at bottom right,
+            rgba(125, 211, 252, 0.12),
+            transparent 35%
+        ),
+        #0f172a;
+}
+
+/* Ajuste para celulares */
+@media (max-width: 480px) {
+    body.auth-page {
+        padding: 24px 16px;
     }
 }

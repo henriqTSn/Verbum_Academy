@@ -1,47 +1,78 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="pt-BR">
- 
 <head>
-<meta charset="UTF-8">
-<title>Verificação 2FA</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Verificação 2FA | VERBUM</title>
+
+    <link rel="stylesheet" href="{% static 'css/verbum.css' %}">
 </head>
- 
-<body>
- 
-    <h1>Autenticação em dois fatores</h1>
- 
-    <p>
-        Digite o código de 6 dígitos gerado pelo seu aplicativo autenticador.
-</p>
- 
-    {% if error %}
-<p>{{ error }}</p>
-    {% endif %}
- 
-    <form method="post">
- 
-        {% csrf_token %}
- 
-        <label for="codigo">
-            Código:
-</label>
- 
-        <input
-            id="codigo"
-            name="codigo"
-            type="text"
-            inputmode="numeric"
-            autocomplete="one-time-code"
-            maxlength="6"
-            required
->
- 
-        <button type="submit">
-            Verificar
-</button>
- 
-    </form>
- 
+
+<body class="auth-page">
+
+    <main class="auth-container">
+
+        <a class="auth-brand" href="{% url 'login' %}">
+            VERBUM
+        </a>
+
+        <form class="login-card two-factor-card" method="post">
+            {% csrf_token %}
+
+            <p class="tag">VERIFICAÇÃO DE SEGURANÇA</p>
+
+            <h2>Autenticação em dois fatores</h2>
+
+            <p class="subtext">
+                Digite o código de 6 dígitos gerado
+                pelo seu aplicativo autenticador.
+            </p>
+
+            {% if error %}
+                <div
+                    id="codigo-error"
+                    class="two-factor-error"
+                    role="alert"
+                >
+                    {{ error }}
+                </div>
+            {% endif %}
+
+            <label for="codigo">
+                Código de verificação
+            </label>
+
+            <input
+                class="two-factor-code"
+                id="codigo"
+                name="codigo"
+                type="text"
+                inputmode="numeric"
+                autocomplete="one-time-code"
+                placeholder="000000"
+                pattern="[0-9]{6}"
+                maxlength="6"
+                title="Digite exatamente 6 números"
+                autofocus
+                required
+            >
+
+            <button class="button-primary" type="submit">
+                Verificar
+            </button>
+
+            <p class="register">
+                <a href="{% url 'login' %}">
+                    Voltar para o login
+                </a>
+            </p>
+
+        </form>
+
+    </main>
+
 </body>
- 
 </html>
