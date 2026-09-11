@@ -15,7 +15,6 @@ Implementadas nesta entrega:
 - Autenticação em dois fatores (2FA)
 - Recuperação de senha por token temporário (expiração 15 min, uso único e logs)
 
-
 ## Stack Tecnológico
 
 ### Backend
@@ -25,7 +24,7 @@ Implementadas nesta entrega:
 
 ### Banco de Dados
 
-- SQLite 
+- SQLite
 
 ### Frontend
 
