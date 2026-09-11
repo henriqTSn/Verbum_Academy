@@ -16,10 +16,10 @@ Pasta de requisitos, escopo, segurança e evidências do Projeto Integrador — 
 | [lgpd-testes.md](lgpd-testes.md) | Casos de teste do front-end da etapa 3 |
 | [requisitos-lgpd.md](requisitos-lgpd.md) | Checklist 4.1–4.11 + prints |
 | [testes.md](testes.md) | Casos de teste executados no front-end |
-| [evidencias/](evidencias/) | Capturas de tela dos testes |
-| `Projeto Integrador.pdf` | Enunciado da disciplina |
-| `Requisitos(2).pdf` | Rubrica / checklist oficial de avaliação |
+| [evidencias/](evidencias) | Capturas de tela dos testes |
+| Projeto Integrador.pdf | Enunciado da disciplina |
+| Requisitos(2).pdf | Rubrica / checklist oficial de avaliação |
 
 ## Status da documentação
-A etapa atual cobre autenticação, recuperação de senha e conformidade com a LGPD
-(itens 4.1 a 4.11 do checklist). HTTPS de produção permanece na seção 3 da rubrica.
+
+A etapa atual cobre autenticação, recuperação de senha e conformidade com a LGPD (itens 4.1 a 4.11 do checklist). HTTPS de produção permanece na seção 3 da rubrica.
