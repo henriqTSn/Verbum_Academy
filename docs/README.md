@@ -21,7 +21,5 @@ Pasta de requisitos, escopo, segurança e evidências do Projeto Integrador — 
 | `Requisitos(2).pdf` | Rubrica / checklist oficial de avaliação |
 
 ## Status da documentação
-
-A etapa atual cobre autenticação, gestão de credenciais e recuperação de senha (itens 2.1 a 2.7 do checklist).
-
-HTTPS de produção, telas de titular (LGPD) e logs de auditoria ampliada permanecem previstos para as próximas entregas.
+A etapa atual cobre autenticação, recuperação de senha e conformidade com a LGPD
+(itens 4.1 a 4.11 do checklist). HTTPS de produção permanece na seção 3 da rubrica.
