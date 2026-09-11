@@ -1,4 +1,4 @@
-# Verbum Labs
+# Verbum Academy
 
 ## Plataforma de Aprendizagem de Idiomas
 
