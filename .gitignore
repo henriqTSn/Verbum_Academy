@@ -9,6 +9,7 @@ env/
  
 # Banco SQLite local
 db.sqlite3
+db.sqlite3.backup
  
 # Variáveis de ambiente e segredos
 .env
@@ -239,3 +240,5 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+staticfiles/

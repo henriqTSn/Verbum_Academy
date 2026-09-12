@@ -202,7 +202,61 @@ Registros de solicitação, sucesso e falha, sem senha ou token.
 
 ---
 
-## 21. Resumo
+## 21. Criptografia do segredo TOTP
+
+Após a configuração do 2FA, foi verificado no banco de dados que o campo `totp_secret` estava armazenado como um token Fernet, e não em texto puro.
+
+A verificação foi realizada pelo shell do Django.
+
+Resultado obtido:
+
+`2FA ativo: True`
+
+`Tamanho: 140`
+
+`Fernet: True`
+
+**Resultado: Aprovado.**
+
+---
+
+## 22. Descriptografia do segredo TOTP
+
+Foi verificado que a aplicação consegue descriptografar o segredo TOTP armazenado no banco utilizando a chave criptográfica no ambiente.
+
+A verificação foi realizada sem exibir o segredo original.
+
+Resultado obtido:
+
+`Descriptografia realizada: True`
+
+`Tamanho do segredo: 32`
+
+**Resultado: Aprovado.**
+
+---
+
+## 23. Fluxo completo do 2FA com segredo criptografado
+
+Foi realizado o fluxo completo de autenticação utilizando 2FA após a implementação da criptografia do `totp_secret`.
+
+O teste consistiu em:
+
+1. Configuração do 2FA para o usuário.
+2. Cadastro do segredo no aplicativo autenticador.
+3. Logout.
+4. Novo login com e-mail e senha.
+5. Solicitação do código TOTP.
+6. Validação do código.
+7. Acesso ao painel.
+
+O fluxo foi concluído com sucesso.
+
+**Resultado: Aprovado.**
+
+---
+
+## 24. Resumo
 
 | Teste | Funcionalidade | Evidência | Resultado |
 | --- | --- | --- | --- |
@@ -226,9 +280,12 @@ Registros de solicitação, sucesso e falha, sem senha ou token.
 | 18 | Token reutilizado | 17 | Aprovado |
 | 19 | Token inválido | 18 | Aprovado |
 | 20 | Logs | 19, 20 e 21 | Aprovado |
+| 21 | Criptografia do segredo TOTP | - | Aprovado |
+| 22 | Descriptografia do segredo TOTP | - | Aprovado |
+| 23 | Fluxo completo do 2FA criptografado | - | Aprovado |
 
 ---
 
-## 22. Observações
+## 25. Observações
 
 Os testes foram feitos pelo front-end. O aviso `models.W042` não impede a avaliação funcional.

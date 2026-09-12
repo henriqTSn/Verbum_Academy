@@ -13,7 +13,7 @@ class UserProfile(models.Model):
 	# Aqui é onde o secret TOTP é armazenado 
 	# o motivo do blank=True e null=True é que nem todo usuário imediatamente terá 2FA configurado
 	totp_secret = models.CharField(
-		max_length=32,
+		max_length=255,
 		blank=True,
 		null=True
 

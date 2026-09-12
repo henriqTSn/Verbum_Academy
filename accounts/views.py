@@ -9,6 +9,7 @@ from django.utils import timezone
 from datetime import timedelta
 from .models import UserProfile
 from django.contrib.auth import views as auth_views
+from accounts.crypto import encrypt_totp_secret, decrypt_totp_secret
 import pyotp
 import logging
 
@@ -195,7 +196,8 @@ def verify_2fa(request):
 
 		codigo = request.POST.get('codigo', '').strip()
 
-		totp = pyotp.TOTP(profile.totp_secret)
+		secret = decrypt_totp_secret(profile.totp_secret)
+		totp = pyotp.TOTP(secret)
 
 		if totp.verify(codigo):
 
@@ -228,12 +230,18 @@ def setup_2fa(request):
 	# Essa parte a gente pega o UserProfile associado ao usuário autenticado
 	profile = request.user.userprofile
 
-	# Se o usuário não tiver um secret TOTP a condicional é True, cria um secret aleatório e salva no banco.
+	# Se o usuário não tiver um secret TOTP a condicional é True, cria um secret aleatório encripta ele e salva no banco.
+	# Se o usuário já tiver 2fa a variável secret é descriptografada
 	if not profile.totp_secret:
-		profile.totp_secret = pyotp.random_base32()
+		secret = pyotp.random_base32()
+
+		profile.totp_secret = encrypt_totp_secret(secret)
 		profile.save()
 
-	totp = pyotp.TOTP(profile.totp_secret)
+	else:
+		secret = decrypt_totp_secret(profile.totp_secret)
+
+	totp = pyotp.TOTP(secret)
 
 	# Se o usuário enviar o formulário nós entramos nesta parte POST /accounts/setup2fa/
 	if request.method == 'POST':
@@ -267,7 +275,7 @@ def setup_2fa(request):
 		request,
 		'accounts/setup_2fa.html',
 		{
-			'secret': profile.totp_secret,
+			'secret': secret,
 			'provisioning_uri': provisioning_uri,
 		}
 	)

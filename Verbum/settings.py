@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +22,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-r(lcw^^74f5sg+6vccp+80wxt*2pp(7dn0t)o8o3mnaas3a94e'
+SECRET_KEY = os.environ['DJANGO_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# Esse código permite que o DEBUG seja alterado no Render
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
 
 # Application definition
@@ -43,6 +46,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+	'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -74,12 +78,22 @@ WSGI_APPLICATION = 'Verbum.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/6.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+DATABASE_URL = os.environ.get('DATABASE_URL')
+
+if DATABASE_URL:
+	DATABASES = {
+		'default': dj_database_url.parse(DATABASE_URL)
+
+	}
+
+else:
+	DATABASES = {
+		'default': {
+			'ENGINE': 'django.db.backends.sqlite3',
+			'NAME': BASE_DIR / 'db.sqlite3',
+
+		}
+	}
 
 
 # Password validation
@@ -118,6 +132,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 
 # Email
 # https://docs.djangoproject.com/en/6.1/topics/email/#topic-email-configuration
@@ -138,10 +154,33 @@ SESSION_SAVE_EVERY_REQUEST = True
 # Impede que JavaScript acesse diretamente o cookie de sessão
 SESSION_COOKIE_HTTPONLY = True
 
+# Configurações de segurança utilizadas apenas em produção.
+# Em desenvolvimento local o DEBUG permanece True, funcionando com HTTP
+
+if not DEBUG:
+
+	# O user é redirecionado para https
+	SECURE_SSL_REDIRECT = True
+
+	SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+	# Faz o cookie de sessão ser enviado somente através de https
+	SESSION_COOKIE_SECURE = True
+
+	# Aplica a mesma proteção no cookie utilizado pelo CSRF do django
+	CSRF_COOKIE_SECURE = True
+
 # Tempo de validade do token de recuperação de senha
 # 15 minutos = 900 segundos
 
 PASSWORD_RESET_TIMEOUT = 900
+
+CSRF_TRUSTED_ORIGINS = [
+	origin.strip()
+	for origin in os.environ.get('CSRF_TRUSTED_ORIGINS', '').split(',')
+	if origin.strip()
+
+]
 
 # Este código é relacionado ao logging de atividade do usuário
 LOGGING = {
@@ -173,3 +212,7 @@ LOGGING = {
 	},
 
 }
+
+# Chave usada para criptografar os segredos totp
+# Essa chave é fornecida pelo ambiente e não fica armazenada no código
+VERBUM_ENCRYPTION_KEY = os.environ['VERBUM_ENCRYPTION_KEY']

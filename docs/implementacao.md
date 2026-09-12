@@ -61,15 +61,38 @@ Em desenvolvimento, o link é emitido pelo backend de e-mail de console.
 
 ---
 
-## 9. Estrutura
+## 9. Criptografia de dados sensíveis
+
+O campo `totp_secret` do modelo `UserProfile` é criptografado antes de ser armazenado no banco de dados.
+
+A lógica de criptografia está separada em `accounts/crypto.py`, utilizando a biblioteca `cryptography` e o esquema Fernet.
+
+As funções utilizdas são:
+
+
+-`encrypt_totp_secret()` - criptografa o segredo TOTP antes do armazenamento.
+
+-`decrypt_totp_secret()` - descriptografa o segredo quando necessário para validar o 2FA.
+
+
+A chave utilizada pelo Fernet é obtida por meio da variável de ambiente `VERBUM_ENCRYPTION_KEY`.
+
+O fluxo de configuração e validação do 2FA utiliza essas funções em `setup_2fa()` e `verify_2fa()`, respectivamente.
+
+Também foi criada uma migration para criptografar os segredos TOTP que já existiam no banco antes da alteração da implementação.
+
+---
+
+## 10. Estrutura
 
 - `accounts/views.py` — cadastro, login, 2FA, logout e recuperação
 - `accounts/models.py` — `UserProfile`
+- `acounts/crypto.py` — funções de criptografia e descriptografia dos segredos TOTP
 - `accounts/urls.py` — rotas, inclusive `password-reset`
 - `Verbum/settings.py` — sessão, validadores, timeout e log
 
 ---
 
-## 10. Considerações
+## 11. Considerações
 
 A comprovação é feita pelos testes de front-end e pelas evidências em `docs/evidencias/`.
