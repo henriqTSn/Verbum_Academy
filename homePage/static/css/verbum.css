@@ -993,3 +993,258 @@ body.auth-page {
         padding: 24px 16px;
     }
 }
+
+/* TELA DE CONFIGURAÇÃO DO 2FA */
+
+.two-factor-setup-container {
+    width: min(100%, 500px);
+    gap: 14px;
+}
+
+/* Mantém VERBUM ACADEMY em uma linha */
+
+.two-factor-setup-container .auth-brand {
+    font-size: 30px;
+    letter-spacing: 6px;
+    white-space: nowrap;
+}
+
+/* Cartão principal */
+
+.two-factor-setup-card {
+    width: 100%;
+    padding: 22px 26px;
+}
+
+.two-factor-setup-card .tag {
+    margin-bottom: 6px;
+}
+
+.two-factor-setup-card h2 {
+    margin: 0;
+
+    font-size: 28px;
+    line-height: 1.15;
+}
+
+.two-factor-setup-card .subtext {
+    margin: 6px 0 14px;
+    line-height: 1.4;
+}
+
+.setup-message {
+    margin-bottom: 12px;
+}
+
+/* Caixa de cada etapa */
+
+.setup-step {
+    padding: 12px 14px;
+
+    background: #0f172a;
+    border: 1px solid rgba(125, 211, 252, 0.16);
+    border-radius: 14px;
+}
+
+.setup-step + .setup-step {
+    margin-top: 12px;
+}
+
+/* Título e número da etapa */
+
+.setup-step-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.setup-step-title h3 {
+    margin: 0;
+
+    color: #f8fafc;
+    font-size: 16px;
+}
+
+.setup-step-number {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    color: #0f172a;
+    background: #7dd3fc;
+    border-radius: 50%;
+
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Textos explicativos */
+
+.setup-description {
+    margin: 8px 0 10px;
+
+    color: #94a3b8;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+/* Informações da conta */
+
+.setup-information {
+    display: grid;
+    gap: 6px;
+
+    margin-bottom: 10px;
+    padding: 10px 12px;
+
+    background: #1e293b;
+    border-radius: 10px;
+}
+
+.setup-information p {
+    margin: 0;
+
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+
+    font-size: 13px;
+}
+
+.setup-information span {
+    color: #94a3b8;
+}
+
+.setup-information strong {
+    color: #e2e8f0;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+/* Chave secreta */
+
+.setup-secret-label {
+    margin: 0 0 5px;
+
+    color: #e2e8f0;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.setup-secret {
+    display: block;
+    padding: 9px;
+
+    color: #7dd3fc;
+    background: #1e293b;
+
+    border: 1px dashed rgba(125, 211, 252, 0.45);
+    border-radius: 10px;
+
+    font-family: monospace;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+.setup-warning {
+    margin: 6px 0 0;
+
+    color: #ee2121;
+    font-size: 11px;
+}
+
+/* Formulário do código */
+
+.setup-form label {
+    margin: 0 0 6px;
+}
+
+.setup-form .two-factor-code {
+    height: 44px;
+
+    font-size: 20px;
+    letter-spacing: 8px;
+    text-align: center;
+}
+
+.setup-form .button-primary {
+    height: 46px;
+    margin-top: 12px;
+}
+
+/* Ajustes para telas baixas de computador */
+
+@media (max-height: 800px) and (min-width: 481px) {
+    body.auth-page {
+        padding: 14px;
+    }
+
+    .two-factor-setup-container .auth-brand {
+        font-size: 28px;
+    }
+}
+
+/* Ajustes para celular */
+
+@media (max-width: 480px) {
+    .two-factor-setup-container {
+        gap: 16px;
+    }
+
+    .two-factor-setup-container .auth-brand {
+        font-size: 24px;
+        letter-spacing: 4px;
+    }
+
+    .two-factor-setup-card {
+        padding: 24px 20px;
+    }
+
+    .setup-information p {
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .setup-information strong {
+        text-align: left;
+    }
+}
+
+.setup-cancel {
+    margin: 8px 0 0;
+
+    font-size: 13px;
+    text-align: center;
+}
+
+.setup-cancel a {
+    color: #7dd3fc;
+}
+
+/* Aproxima o link e as bordas inferiores */
+
+.two-factor-setup-card p.setup-cancel {
+    margin: 8px 0 4px;
+    padding: 0;
+
+    font-size: 13px;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.two-factor-setup-card p.setup-cancel a {
+    color: #7dd3fc;
+}
+
+.two-factor-setup-card .setup-step:last-child {
+    padding-bottom: 4px;
+}
+
+.two-factor-setup-card {
+    padding-bottom: 6px;
+}

@@ -1,65 +1,134 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<title>Configurar 2FA</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Configurar 2FA | VERBUM ACADEMY</title>
+
+    <link rel="stylesheet" href="{% static 'css/verbum.css' %}">
 </head>
- 
-<body>
- 
-    <h1>Configurar autenticação em dois fatores</h1>
- 
-    {% if messages %}
-        {% for message in messages %}
-<p>{{ message }}</p>
-        {% endfor %}
-    {% endif %}
- 
-    <h2>1. Configure seu aplicativo autenticador</h2>
- 
-    <p>
-        Use seu aplicativo autenticador para adicionar uma nova conta.
-</p>
- 
-    <p>
-        Serviço: <strong>Verbum</strong>
-</p>
- 
-    <p>
-        E-mail: <strong>{{ request.user.email }}</strong>
-</p>
- 
-    <p>
-        Secret:
-</p>
- 
-    <strong>{{ secret }}</strong>
- 
-    <h2>2. Confirme o código</h2>
- 
-    <form method="post">
- 
-        {% csrf_token %}
- 
-        <label for="codigo">
-            Código de 6 dígitos:
-</label>
- 
-        <input
-            id="codigo"
-            name="codigo"
-            type="text"
-            inputmode="numeric"
-            autocomplete="one-time-code"
-            maxlength="6"
-            required
->
- 
-        <button type="submit">
-            Ativar 2FA
-</button>
- 
-    </form>
- 
+
+<body class="auth-page">
+
+    <main class="auth-container two-factor-setup-container">
+
+        <a class="auth-brand" href="{% url 'painel' %}" aria-label="Cancelar configuração e voltar para o login"> VERBUM ACADEMY
+        </a>
+
+        <section class="login-card two-factor-setup-card">
+
+            <p class="tag">PROTEÇÃO DA CONTA</p>
+
+            <h2>Configurar autenticação em dois fatores</h2>
+
+            <p class="subtext">
+                Proteja sua conta utilizando um aplicativo autenticador.
+            </p>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="message setup-message" role="status">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <div class="setup-step">
+
+                <div class="setup-step-title">
+                    <span class="setup-step-number">1</span>
+
+                    <h3>Configure seu aplicativo</h3>
+                </div>
+
+                <p class="setup-description">
+                    Abra seu aplicativo autenticador e adicione
+                    uma nova conta utilizando os dados abaixo.
+                </p>
+
+                <div class="setup-information">
+
+                    <p>
+                        <span>Serviço</span>
+                        <strong>VERBUM ACADEMY</strong>
+                    </p>
+
+                    <p>
+                        <span>E-mail</span>
+                        <strong>{{ request.user.email }}</strong>
+                    </p>
+
+                </div>
+
+                <p class="setup-secret-label">
+                    Chave secreta
+                </p>
+
+                <code class="setup-secret">
+                    {{ secret }}
+                </code>
+
+                <p class="setup-warning">
+                    Não compartilhe essa chave com outras pessoas.
+                </p>
+
+            </div>
+
+            <div class="setup-step">
+
+                <div class="setup-step-title">
+                    <span class="setup-step-number">2</span>
+
+                    <h3>Confirme o código</h3>
+                </div>
+
+                <p class="setup-description">
+                    Digite o código de 6 dígitos exibido
+                    no aplicativo autenticador.
+                </p>
+
+                <form method="post" class="setup-form">
+                    {% csrf_token %}
+
+                    <label for="codigo">
+                        Código de verificação
+                    </label>
+
+                    <input
+                        class="two-factor-code"
+                        id="codigo"
+                        name="codigo"
+                        type="text"
+                        inputmode="numeric"
+                        autocomplete="one-time-code"
+                        placeholder="000000"
+                        pattern="[0-9]{6}"
+                        minlength="6"
+                        maxlength="6"
+                        title="Digite exatamente 6 números"
+                        autofocus
+                        required
+                    >
+
+                    <button class="button-primary" type="submit">
+                        Ativar 2FA
+                    </button>
+
+                </form>
+   
+                <p class="setup-cancel">
+                    <a href="{% url 'painel' %}"> Cancelar e voltar
+                    </a>
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
 </body>
 </html>
