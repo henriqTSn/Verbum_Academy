@@ -993,3 +993,566 @@ body.auth-page {
         padding: 24px 16px;
     }
 }
+
+/* TELA DE CONFIGURAÇÃO DO 2FA */
+
+.two-factor-setup-container {
+    width: min(100%, 500px);
+    gap: 14px;
+}
+
+/* Mantém VERBUM ACADEMY em uma linha */
+
+.two-factor-setup-container .auth-brand {
+    font-size: 30px;
+    letter-spacing: 6px;
+    white-space: nowrap;
+}
+
+/* Cartão principal */
+
+.two-factor-setup-card {
+    width: 100%;
+    padding: 22px 26px;
+}
+
+.two-factor-setup-card .tag {
+    margin-bottom: 6px;
+}
+
+.two-factor-setup-card h2 {
+    margin: 0;
+
+    font-size: 28px;
+    line-height: 1.15;
+}
+
+.two-factor-setup-card .subtext {
+    margin: 6px 0 14px;
+    line-height: 1.4;
+}
+
+.setup-message {
+    margin-bottom: 12px;
+}
+
+/* Caixa de cada etapa */
+
+.setup-step {
+    padding: 12px 14px;
+
+    background: #0f172a;
+    border: 1px solid rgba(125, 211, 252, 0.16);
+    border-radius: 14px;
+}
+
+.setup-step + .setup-step {
+    margin-top: 12px;
+}
+
+/* Título e número da etapa */
+
+.setup-step-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.setup-step-title h3 {
+    margin: 0;
+
+    color: #f8fafc;
+    font-size: 16px;
+}
+
+.setup-step-number {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    color: #0f172a;
+    background: #7dd3fc;
+    border-radius: 50%;
+
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Textos explicativos */
+
+.setup-description {
+    margin: 8px 0 10px;
+
+    color: #94a3b8;
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+/* Informações da conta */
+
+.setup-information {
+    display: grid;
+    gap: 6px;
+
+    margin-bottom: 10px;
+    padding: 10px 12px;
+
+    background: #1e293b;
+    border-radius: 10px;
+}
+
+.setup-information p {
+    margin: 0;
+
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+
+    font-size: 13px;
+}
+
+.setup-information span {
+    color: #94a3b8;
+}
+
+.setup-information strong {
+    color: #e2e8f0;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+/* Chave secreta */
+
+.setup-secret-label {
+    margin: 0 0 5px;
+
+    color: #e2e8f0;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.setup-secret {
+    display: block;
+    padding: 9px;
+
+    color: #7dd3fc;
+    background: #1e293b;
+
+    border: 1px dashed rgba(125, 211, 252, 0.45);
+    border-radius: 10px;
+
+    font-family: monospace;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+.setup-warning {
+    margin: 6px 0 0;
+
+    color: #ee2121;
+    font-size: 11px;
+}
+
+/* Formulário do código */
+
+.setup-form label {
+    margin: 0 0 6px;
+}
+
+.setup-form .two-factor-code {
+    height: 44px;
+
+    font-size: 20px;
+    letter-spacing: 8px;
+    text-align: center;
+}
+
+.setup-form .button-primary {
+    height: 46px;
+    margin-top: 12px;
+}
+
+/* Ajustes para telas baixas de computador */
+
+@media (max-height: 800px) and (min-width: 481px) {
+    body.auth-page {
+        padding: 14px;
+    }
+
+    .two-factor-setup-container .auth-brand {
+        font-size: 28px;
+    }
+}
+
+/* Ajustes para celular */
+
+@media (max-width: 480px) {
+    .two-factor-setup-container {
+        gap: 16px;
+    }
+
+    .two-factor-setup-container .auth-brand {
+        font-size: 24px;
+        letter-spacing: 4px;
+    }
+
+    .two-factor-setup-card {
+        padding: 24px 20px;
+    }
+
+    .setup-information p {
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .setup-information strong {
+        text-align: left;
+    }
+}
+
+.setup-cancel {
+    margin: 8px 0 0;
+
+    font-size: 13px;
+    text-align: center;
+}
+
+.setup-cancel a {
+    color: #7dd3fc;
+}
+
+/* Aproxima o link e as bordas inferiores */
+
+.two-factor-setup-card p.setup-cancel {
+    margin: 8px 0 4px;
+    padding: 0;
+
+    font-size: 13px;
+    line-height: 1.4;
+    text-align: center;
+}
+
+.two-factor-setup-card p.setup-cancel a {
+    color: #7dd3fc;
+}
+
+.two-factor-setup-card .setup-step:last-child {
+    padding-bottom: 4px;
+}
+
+.two-factor-setup-card {
+    padding-bottom: 6px;
+}
+
+
+/* TELA DE PERFIL DO USUÁRIO (em fase de testes ainda) */
+
+.profile-page {
+    min-height: 100vh;
+    margin: 0;
+
+    color: #f8fafc;
+
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(125, 211, 252, 0.12),
+            transparent 35%
+        ),
+        #0f172a;
+}
+
+.profile-container {
+    width: min(100%, 1050px);
+    margin: 0 auto;
+    padding: 32px;
+}
+
+/* Cabeçalho */
+
+.profile-header {
+    margin-bottom: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.profile-brand {
+    font-size: 28px;
+    letter-spacing: 6px;
+    white-space: nowrap;
+}
+
+.profile-back {
+    color: #7dd3fc;
+    font-size: 14px;
+}
+
+/* Mensagens do Django */
+
+.profile-message {
+    margin-bottom: 18px;
+    padding: 12px 14px;
+
+    color: #dbeafe;
+    background: rgba(125, 211, 252, 0.12);
+    border-left: 4px solid #7dd3fc;
+    border-radius: 10px;
+}
+
+.profile-message.success {
+    color: #bbf7d0;
+    background: rgba(34, 197, 94, 0.12);
+    border-left-color: #22c55e;
+}
+
+.profile-message.error {
+    color: #fecaca;
+    background: rgba(239, 68, 68, 0.12);
+    border-left-color: #ef4444;
+}
+
+/* Organização dos cartões */
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    gap: 20px;
+}
+
+.profile-card {
+    padding: 28px;
+
+    color: #f8fafc;
+    background: #1e293b;
+
+    border: 1px solid rgba(125, 211, 252, 0.2);
+    border-radius: 22px;
+
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+/* Resumo do usuário */
+
+.profile-summary {
+    text-align: center;
+}
+
+.profile-avatar {
+    width: 92px;
+    height: 92px;
+    margin: 0 auto 16px;
+
+    display: grid;
+    place-items: center;
+
+    color: #0f172a;
+    background: #7dd3fc;
+    border-radius: 50%;
+
+    font-size: 34px;
+    font-weight: bold;
+
+    box-shadow: 0 0 30px rgba(125, 211, 252, 0.25);
+}
+
+.profile-summary h1 {
+    margin: 0 0 6px;
+
+    color: #f8fafc;
+    font-size: 24px;
+}
+
+.profile-email {
+    margin: 0 0 16px;
+
+    color: #94a3b8;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+.profile-language {
+    display: inline-block;
+    padding: 7px 12px;
+
+    color: #7dd3fc;
+    background: rgba(125, 211, 252, 0.12);
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Informações resumidas */
+
+.profile-information {
+    margin-top: 24px;
+    padding-top: 18px;
+
+    display: grid;
+    gap: 14px;
+
+    border-top: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.profile-information-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+
+    font-size: 13px;
+    text-align: left;
+}
+
+.profile-information-row span {
+    color: #94a3b8;
+}
+
+.profile-information-row strong {
+    color: #e2e8f0;
+    text-align: right;
+}
+
+.profile-status.active {
+    color: #86efac;
+}
+
+.profile-status.inactive {
+    color: #fca5a5;
+}
+
+/* Cabeçalho do formulário */
+
+.profile-card-header {
+    margin-bottom: 22px;
+}
+
+.profile-card-header h2 {
+    margin: 0;
+
+    color: #f8fafc;
+    font-size: 26px;
+}
+
+.profile-card-header > p {
+    margin: 8px 0 0;
+
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+/* Formulário */
+
+.profile-form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.profile-field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.profile-field-full {
+    grid-column: 1 / -1;
+}
+
+.profile-field label {
+    color: #e2e8f0;
+
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.profile-field input,
+.profile-field select {
+    width: 100%;
+    height: 46px;
+    padding: 0 13px;
+
+    color: #f8fafc;
+    background: #334155;
+
+    border: 2px solid transparent;
+    border-radius: 10px;
+    outline: none;
+
+    font: inherit;
+}
+
+.profile-field input:focus,
+.profile-field select:focus {
+    border-color: #7dd3fc;
+    box-shadow: 0 0 0 4px rgba(125, 211, 252, 0.14);
+}
+
+.profile-field input[readonly] {
+    color: #94a3b8;
+    cursor: not-allowed;
+}
+
+.profile-field small {
+    color: #94a3b8;
+    font-size: 11px;
+}
+
+.profile-save {
+    width: auto;
+    min-width: 190px;
+    margin-top: 4px;
+    padding: 0 24px;
+
+    grid-column: 1 / -1;
+    justify-self: end;
+}
+
+/* Responsividade */
+
+@media (max-width: 800px) {
+    .profile-container {
+        padding: 24px 18px;
+    }
+
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 520px) {
+    .profile-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .profile-brand {
+        font-size: 22px;
+        letter-spacing: 4px;
+    }
+
+    .profile-card {
+        padding: 24px 20px;
+    }
+
+    .profile-form {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-field-full,
+    .profile-save {
+        grid-column: auto;
+    }
+
+    .profile-save {
+        width: 100%;
+    }
+}

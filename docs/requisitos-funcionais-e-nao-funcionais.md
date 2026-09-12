@@ -221,22 +221,22 @@ O sistema deve listar cada dado pessoal coletado e associá-lo a uma finalidade.
 Não devem ser coletados dados desnecessários ao serviço (minimização).
 
 #### RF-21 — Consentimento
-**Prioridade:** Must · **Status:** Planejado · **Origem:** PI 4.4–4.7
+**Prioridade:** Must · **Status:** Implementado · **Origem:** PI 4.4–4.7
 
 O titular deve registrar consentimento explícito, associado à finalidade, com data e versão do texto. Deve poder revogar o consentimento.
 
 #### RF-22 — Consulta aos dados
-**Prioridade:** Must · **Status:** Planejado · **Origem:** PI 4.8
+**Prioridade:** Must · **Status:** Implementado · **Origem:** PI 4.8
 
 O titular autenticado deve consultar os dados pessoais armazenados sobre si.
 
 #### RF-23 — Exportação dos dados
-**Prioridade:** Must · **Status:** Planejado · **Origem:** PI 4.9
+**Prioridade:** Must · **Status:** Implementado · **Origem:** PI 4.9
 
 O titular deve exportar seus dados em formato estruturado e de uso comum (ex.: JSON).
 
 #### RF-24 — Exclusão de conta e dados
-**Prioridade:** Must · **Status:** Planejado · **Origem:** PI 4.10
+**Prioridade:** Must · **Status:** Implementado · **Origem:** PI 4.10
 
 O titular deve solicitar a exclusão da conta e dos dados pessoais, observando eventuais retenções legais mínimas de logs de segurança.
 

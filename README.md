@@ -1,4 +1,4 @@
-# Verbum
+# Verbum Academy
 
 ## Plataforma de Aprendizagem de Idiomas
 
@@ -15,7 +15,6 @@ Implementadas nesta entrega:
 - Autenticação em dois fatores (2FA)
 - Recuperação de senha por token temporário (expiração 15 min, uso único e logs)
 
-
 ## Stack Tecnológico
 
 ### Backend
@@ -25,7 +24,7 @@ Implementadas nesta entrega:
 
 ### Banco de Dados
 
-- SQLite 
+- SQLite
 
 ### Frontend
 
@@ -49,14 +48,18 @@ Implementados nesta entrega:
 
 ## Privacidade e LGPD
 
-O sistema será desenvolvido considerando princípios de proteção de dados pessoais, permitindo ao usuário:
+Implementado nesta entrega (Lei nº 13.709/2018, itens 4.1 a 4.11):
 
-- Consultar seus dados
-- Solicitar a exportação de seus dados
-- Excluir sua conta
-- Gerenciar seu consentimento
+- Inventário de dados pessoais com finalidade e base legal
+- Minimização (cadastro sem CPF, telefone ou dado sensível)
+- Consentimento explícito, com finalidade, data e versão da política
+- Revogação do consentimento
+- Consulta dos dados do titular
+- Exportação em JSON
+- Exclusão da conta e dos dados pessoais
 
-Os registros de consentimento considerarão informações como finalidade, data e versão do consentimento.
+Documentação: `docs/lgpd.md`  
+Política versionada: `docs/politica-privacidade.md`
 
 ## Como executar
 
@@ -91,8 +94,7 @@ Os documentos de requisitos e escopo fornecidos para o Projeto Integrador estão
 - Gabriel
 
 ## Entrega Atual
-- Release: https://github.com/sarahmazoni/Verbum/releases/tag/v1.2.0
-- Documentação da etapa 2: docs/recuperacao-senha.md
+- Documentação da etapa 3: docs/lgpd.md
 - Quadro Kanban: https://github.com/users/sarahmazoni/projects/1
 
 ## Status

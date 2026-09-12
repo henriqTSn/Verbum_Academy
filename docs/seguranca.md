@@ -114,3 +114,17 @@ A perda da chave impossibilita a descriptografia dos dados protegidos por ela. P
 | Criptografia em repouso | Fernet para segredos TOTP |
 | Algoritmo criptográfico | Fernet / AES-128-CBC + HMAC-SHA256 |
 | Proteção da chave | Variável de ambiente |
+
+
+---
+
+## 9. Dados pessoais e LGPD
+
+- Cadastro pede só usuário, e-mail e senha (minimização).
+- Consentimento gravado com finalidade, data e versão da política (`ConsentRecord`).
+- Titular consulta, exporta (JSON) e exclui a conta pelo front-end.
+- Exclusão exige e-mail + senha atual.
+- Logs de consentimento, acesso, exportação e exclusão **não** gravam senha, token ou segredo TOTP.
+- Política pública versionada em `/accounts/politica-privacidade/`.
+
+Documentação: `docs/lgpd.md`.

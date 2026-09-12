@@ -96,3 +96,31 @@ Também foi criada uma migration para criptografar os segredos TOTP que já exis
 ## 11. Considerações
 
 A comprovação é feita pelos testes de front-end e pelas evidências em `docs/evidencias/`.
+
+---
+
+## 11. Conformidade com a LGPD
+
+Mapeamento do código dos direitos do titular (itens 4.1 a 4.11).
+
+| Elemento | Local |
+| --- | --- |
+| ConsentRecord (finalidade, data, versão, revogação) | `accounts/models.py` |
+| Cadastro com checkbox de consentimento | `accounts/views.py` → `register()` |
+| Consulta dos dados | `accounts/views.py` → `privacidade()` |
+| Exportação JSON | `accounts/views.py` → `exportar_dados()` |
+| Revogar / renovar consentimento | `accounts/views.py` → `revogar_consentimento()` |
+| Exclusão da conta | `accounts/views.py` → `excluir_conta()` |
+| Política versionada v1.0 | `templates/accounts/politica_privacidade.html` |
+
+Rotas:
+
+- `/accounts/politica-privacidade/`
+- `/accounts/privacidade/`
+- `/accounts/privacidade/exportar/`
+- `/accounts/privacidade/consentimento/`
+- `/accounts/privacidade/excluir/`
+
+O JSON de exportação e os logs **não** incluem senha, salt, token nem segredo TOTP.
+
+Detalhamento: `docs/lgpd.md`. Testes: `docs/lgpd-testes.md`.
