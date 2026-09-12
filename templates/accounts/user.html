@@ -1,0 +1,254 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Meu perfil | VERBUM</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/verbum.css' %}"
+    >
+</head>
+
+<body class="profile-page">
+
+    <main class="profile-container">
+
+        <!-- Cabeçalho da página -->
+        <header class="profile-header">
+
+            <a
+                class="auth-brand profile-brand"
+                href="{% url 'homePage' %}"
+            >
+                VERBUM ACADEMY
+            </a>
+
+            <a
+                class="profile-back"
+                href="{% url 'homePage' %}"
+            >
+                ← Voltar ao painel
+            </a>
+
+        </header>
+
+        <!-- Mensagens enviadas pelo Django -->
+        {% if messages %}
+            <div aria-live="polite">
+                {% for message in messages %}
+                    <div
+                        class="profile-message
+                        {% if message.tags %}{{ message.tags }}{% endif %}"
+                    >
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <section class="profile-grid">
+
+            <!-- Resumo do usuário -->
+            <aside class="profile-card profile-summary">
+
+                <!-- Primeira letra do nome do usuário -->
+                <div class="profile-avatar">
+                    {{ request.user.username|first|upper }}
+                </div>
+
+                <h1>
+                    {% if request.user.get_full_name %}
+                        {{ request.user.get_full_name }}
+                    {% else %}
+                        {{ request.user.username }}
+                    {% endif %}
+                </h1>
+
+                <p class="profile-email">
+                    {{ request.user.email }}
+                </p>
+
+                <span class="profile-language">
+                    Estudando inglês
+                </span>
+
+                <div class="profile-information">
+
+                    <div class="profile-information-row">
+                        <span>Usuário</span>
+
+                        <strong>
+                            {{ request.user.username }}
+                        </strong>
+                    </div>
+
+                    <div class="profile-information-row">
+                        <span>Conta criada em</span>
+
+                        <strong>
+                            {{ request.user.date_joined|date:"d/m/Y" }}
+                        </strong>
+                    </div>
+
+                    <div class="profile-information-row">
+                        <span>Segurança 2FA</span>
+
+                        {% if two_factor_enabled %}
+                            <strong class="profile-status active">
+                                Ativado
+                            </strong>
+                        {% else %}
+                            <strong class="profile-status inactive">
+                                Não ativado
+                            </strong>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+            </aside>
+
+            <!-- Formulário de edição -->
+            <section class="profile-card profile-edit">
+
+                <header class="profile-card-header">
+
+                    <div>
+                        <p class="tag">
+                            DADOS PESSOAIS
+                        </p>
+
+                        <h2>
+                            Informações do perfil
+                        </h2>
+                    </div>
+
+                    <p>
+                        Mantenha suas informações atualizadas.
+                    </p>
+
+                </header>
+
+                <form method="post" class="profile-form">
+                    {% csrf_token %}
+
+                    <!-- Nome -->
+                    <div class="profile-field">
+
+                        <label for="first_name">
+                            Nome
+                        </label>
+
+                        <input
+                            id="first_name"
+                            name="first_name"
+                            type="text"
+                            autocomplete="given-name"
+                            value="{{ request.user.first_name }}"
+                            placeholder="Digite seu nome"
+                        >
+
+                    </div>
+
+                    <!-- Sobrenome -->
+                    <div class="profile-field">
+
+                        <label for="last_name">
+                            Sobrenome
+                        </label>
+
+                        <input
+                            id="last_name"
+                            name="last_name"
+                            type="text"
+                            autocomplete="family-name"
+                            value="{{ request.user.last_name }}"
+                            placeholder="Digite seu sobrenome"
+                        >
+
+                    </div>
+
+                    <!-- Nome de usuário -->
+                    <div class="profile-field">
+
+                        <label for="username">
+                            Usuário
+                        </label>
+
+                        <input
+                            id="username"
+                            name="username"
+                            type="text"
+                            value="{{ request.user.username }}"
+                            readonly
+                        >
+
+                        <small>
+                            O nome de usuário não pode ser alterado aqui.
+                        </small>
+
+                    </div>
+
+                    <!-- E-mail -->
+                    <div class="profile-field">
+
+                        <label for="email">
+                            E-mail
+                        </label>
+
+                        <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            autocomplete="email"
+                            value="{{ request.user.email }}"
+                            placeholder="seuemail@exemplo.com"
+                            required
+                        >
+
+                    </div>
+
+                    <!-- Idioma estudado -->
+                    <div class="profile-field profile-field-full">
+
+                        <label for="study_language">
+                            Idioma estudado
+                        </label>
+
+                        <select
+                            id="study_language"
+                            name="study_language"
+                        >
+                            <option value="en" selected>
+                                Inglês
+                            </option>
+                        </select>
+
+                    </div>
+
+                    <button
+                        class="button-primary profile-save"
+                        type="submit"
+                    >
+                        Salvar alterações
+                    </button>
+
+                </form>
+
+            </section>
+
+        </section>
+
+    </main>
+
+</body>
+</html>
