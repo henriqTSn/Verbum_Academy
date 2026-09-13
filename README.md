@@ -67,7 +67,9 @@ Política versionada: `docs/politica-privacidade.md`
     python manage.py migrate
     python manage.py runserver
 
-A aplicação estará disponível em http://127.0.0.1:8000/.
+Ambiente local: http://127.0.0.1:8000/
+
+Ambiente publicado (HTTPS/TLS): https://verbum-academy.onrender.com/
 
 ## Estrutura do Projeto
 
@@ -94,6 +96,7 @@ Os documentos de requisitos e escopo fornecidos para o Projeto Integrador estão
 - Gabriel
 
 ## Entrega Atual
+- Aplicação: https://verbum-academy.onrender.com/
 - Documentação da etapa 3: docs/lgpd.md
 - Quadro Kanban: https://github.com/users/sarahmazoni/projects/1
 
