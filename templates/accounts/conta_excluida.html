@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conta excluída - VERBUM ACADEMY</title>
+    <link rel="stylesheet" href="{% static 'css/verbum.css' %}">
+</head>
+<body class="register-page">
+    <div class="auth-container">
+        <a class="auth-brand" href="{% url 'login' %}"> VERBUM ACADEMY </a>
+        <main class="register-card">
+            <header class="register-header">
+                <h1>Conta excluída</h1>
+                <p>Seus dados pessoais foram removidos.</p>
+            </header>
+            <p>A conta e o perfil associado não estão mais disponíveis. Logs de segurança podem permanecer sem senha e sem token.</p>
+            <p class="auth-switch">
+                <a href="{% url 'register' %}">Criar nova conta</a>
+                ·
+                <a href="{% url 'login' %}">Entrar</a>
+            </p>
+        </main>
+    </div>
+</body>
+</html>
