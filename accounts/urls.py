@@ -14,4 +14,8 @@ urlpatterns = [
 	path('password-reset-confirm/<uidb64>/<token>/', views.PasswordResetConfirmView.as_view(template_name='password_reset_confirm.html'), name='password_reset_confirm'),
 	path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'), name='password_reset_complete'),
 	path('politica-privacidade/', views.politica_privacidade, name='politica_privacidade'),
+	path('privacidade/', views.privacidade, name='privacidade'),
+	path('privacidade/exportar/', views.exportar_dados, name='exportar_dados'),
+	path('privacidade/consentimento/', views.revogar_consentimento, name='revogar_consentimento'),
+	path('privacidade/excluir/', views.excluir_conta, name='excluir_conta'),
 ]
