@@ -18,25 +18,20 @@
       </div>
       <small>Uma palavra por vez. Um pouco melhor a cada dia.</small>
     </section>
-
     <section class="login-area">
-      <form class="login-card" method="post">
+      <form class="login-card" method="post" action="{% url 'login' %}">
         {% csrf_token %}
         <p class="tag">BEM-VINDO DE VOLTA</p>
         <h2>Acesse sua conta</h2>
         <p class="subtext">Continue de onde parou.</p>
-
         {% if messages %}
           {% for message in messages %}<p class="message">{{ message }}</p>{% endfor %}
         {% endif %}
-
 	{% if error %}
 		<p class="message">{{ error }}</p>
 	{% endif %}
-
         <label for="email">E-mail</label>
         <input id="email" name="email" type="email" autocomplete="email" placeholder="seuemail@exemplo.com" required>
-
         <div class="label-row">
           <label for="password">Senha</label>
           <a href="{% url 'password_reset' %}">Esqueci minha senha</a>
@@ -45,7 +40,6 @@
           <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Digite sua senha" required>
           <button id="toggle-password" type="button">Mostrar</button>
         </div>
-
         <button class="button-primary" type="submit">Entrar</button>
         <p class="register">Ainda não tem conta?<a href="{% url 'register' %}">Cadastre-se</a></p>
       </form>
