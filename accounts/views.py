@@ -7,7 +7,7 @@ from django.core.exceptions import ValidationError
 from django.contrib import messages
 from django.utils import timezone
 from datetime import timedelta
-from .models import UserProfile
+from .models import UserProfile, ConsentRecord
 from django.contrib.auth import views as auth_views
 from accounts.crypto import encrypt_totp_secret, decrypt_totp_secret
 import pyotp
@@ -73,6 +73,16 @@ def register(request):
 		)
 
 		UserProfile.objects.create(user=user)
+
+		# Registra finalidade, data (auto) e versão da política
+		ConsentRecord.objects.create(
+			user=user,
+			purpose=ConsentRecord.PURPOSE_DEFAULT,
+			granted=True,
+			policy_version="1.0",
+			source="register",
+		)
+		logger.info("Consentimento registrado no cadastro.")
 
 		return render(
 			request,
