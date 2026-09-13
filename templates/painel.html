@@ -17,17 +17,16 @@
         <a href="#chunks">“ ” Chunks</a>
         <a href="#historico">↻ Histórico</a>
         <a href="#perfil">◎ Perfil</a>
+        <a href="{% url 'privacidade' %}">Privacidade</a>
 	<a href="{% url 'logout' %}">Sair</a>
       </nav>
       <div class="language"><small>Idioma atual</small><strong>🇬🇧 Inglês</strong></div>
     </aside>
-
     <main class="content">
       <header class="topbar">
         <div><p class="tag">SEU PAINEL</p><h1>Olá, {{ user.first_name|default:user.username }}!</h1><p class="subtext">Vamos praticar um pouco hoje?</p></div>
         <div class="avatar">{{ user.first_name|first|default:'U' }}</div>
       </header>
-
       <div class="dashboard">
         <section>
           <article class="next-lesson">
@@ -36,18 +35,15 @@
             <p>Aprenda chunks como “That makes sense” e “How about you?”.</p>
             <button id="start-lesson" type="button">Começar atividade →</button>
           </article>
-
           <div class="stats">
             <article class="card"><strong>7</strong><span>dias de sequência 🔥</span></article>
             <article class="card"><strong>42</strong><span>palavras aprendidas</span></article>
             <article class="card"><strong>3h</strong><span>estudadas neste mês</span></article>
           </div>
-
           <h2 class="section-title" id="vocabulario">Continuar estudando</h2>
           <article class="card study"><b>Aa</b><div><strong>Vocabulário essencial</strong><span>18 de 30 palavras</span><div class="progress"><i style="width:60%"></i></div></div></article>
           <article class="card study" id="chunks"><b>“ ”</b><div><strong>Chunks do dia a dia</strong><span>9 de 20 expressões</span><div class="progress"><i style="width:45%"></i></div></div></article>
         </section>
-
         <aside>
           <article class="card weekly-goal">
             <p class="tag">META SEMANAL</p>
