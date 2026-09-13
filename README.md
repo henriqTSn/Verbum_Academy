@@ -11,6 +11,7 @@ O projeto tem como objetivo disponibilizar uma plataforma que organize o aprendi
 ## Funcionalidades
 
 Implementadas nesta entrega:
+
 - Cadastro e autenticação de usuários
 - Autenticação em dois fatores (2FA)
 - Recuperação de senha por token temporário (expiração 15 min, uso único e logs)
@@ -39,6 +40,7 @@ O sistema utiliza a arquitetura MVT (Model-View-Template) disponibilizada pelo f
 ## Segurança
 
 Implementados nesta entrega:
+
 - Hash e salt das senhas (Django)
 - 2FA (TOTP)
 - Controle e expiração de sessões
@@ -64,19 +66,27 @@ Política versionada: `docs/politica-privacidade.md`
 ## Como executar
 
 ### Ambiente publicado (o que o professor testa)
+
 https://verbum-academy.onrender.com/
 
 ### Ambiente local
+
 No PowerShell, na pasta que contém `manage.py`:
 
-```powershell
-$env:DJANGO_SECRET_KEY="dev"
-$env:VERBUM_ENCRYPTION_KEY="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
-$env:DEBUG="True"
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py runserver
+    $env:DJANGO_SECRET_KEY="dev"
+    $env:VERBUM_ENCRYPTION_KEY="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+    $env:DEBUG="True"
+    pip install -r requirements.txt
+    python manage.py migrate
+    python manage.py runserver
 
+Se o pip reclamar do Django 6.1 no Python 3.11:
+
+    python -m pip install dj-database-url cryptography pyotp whitenoise
+
+Acesse: http://127.0.0.1:8000/
+
+As chaves acima são só para desenvolvimento. Em produção elas ficam nas variáveis do Render, não no código.
 
 ## Estrutura do Projeto
 
@@ -103,6 +113,7 @@ Os documentos de requisitos e escopo fornecidos para o Projeto Integrador estão
 - Gabriel
 
 ## Entrega Atual
+
 - Aplicação: https://verbum-academy.onrender.com/
 - Documentação da etapa 3: docs/lgpd.md
 - Quadro Kanban: https://github.com/users/sarahmazoni/projects/1
