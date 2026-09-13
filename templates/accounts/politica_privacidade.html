@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidade v{{ policy_version }} - VERBUM ACADEMY</title>
+    <link rel="stylesheet" href="{% static 'css/verbum.css' %}">
+</head>
+<body class="register-page">
+    <div class="auth-container">
+        <a class="auth-brand" href="{% url 'login' %}"> VERBUM ACADEMY </a>
+        <main class="register-card">
+            <header class="register-header">
+                <h1>Política de Privacidade</h1>
+                <p>Versão {{ policy_version }} — Lei nº 13.709/2018 (LGPD)</p>
+            </header>
+
+            <p>O Verbum trata dados pessoais só para prestar o serviço de conta e aprendizagem.</p>
+
+            <p><strong>Dados coletados:</strong> nome de usuário, e-mail, hash da senha, dados opcionais de 2FA e registros de consentimento. Não pedimos CPF, telefone, endereço ou dado sensível.</p>
+
+            <p><strong>Finalidade:</strong> criação e gestão da conta, autenticação, recuperação de senha e acompanhamento do aprendizado. Não vendemos dados e não compartilhamos com terceiros nesta versão.</p>
+
+            <p><strong>Bases legais:</strong> consentimento (art. 7º, I), execução do serviço (art. 7º, V) e segurança da conta (art. 7º, IX).</p>
+
+            <p><strong>Seus direitos:</strong> consultar, exportar em JSON, revogar o consentimento e excluir a conta pelo painel de privacidade, com a sessão autenticada.</p>
+
+            <p><strong>Retenção:</strong> enquanto a conta existir. Na exclusão, o usuário e o perfil são removidos. Logs de segurança podem permanecer sem senha e sem token.</p>
+
+            <p class="auth-switch">
+                <a href="{% url 'register' %}">Voltar ao cadastro</a>
+                ·
+                <a href="{% url 'login' %}">Entrar</a>
+            </p>
+        </main>
+    </div>
+</body>
+</html>
