@@ -63,13 +63,20 @@ Política versionada: `docs/politica-privacidade.md`
 
 ## Como executar
 
-    pip install -r requirements.txt
-    python manage.py migrate
-    python manage.py runserver
+### Ambiente publicado (o que o professor testa)
+https://verbum-academy.onrender.com/
 
-Ambiente local: http://127.0.0.1:8000/
+### Ambiente local
+No PowerShell, na pasta que contém `manage.py`:
 
-Ambiente publicado (HTTPS/TLS): https://verbum-academy.onrender.com/
+```powershell
+$env:DJANGO_SECRET_KEY="dev"
+$env:VERBUM_ENCRYPTION_KEY="AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+$env:DEBUG="True"
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+
 
 ## Estrutura do Projeto
 
