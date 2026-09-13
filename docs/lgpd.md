@@ -265,16 +265,16 @@ Capturas esperadas em `docs/evidencias/` (nomes sugeridos):
 
 | Arquivo | O que mostra |
 | --- | --- |
-| `30-cadastro-sem-consentimento.png` | Cadastro recusado sem checkbox |
-| `31-cadastro-com-consentimento.png` | Cadastro aceito com política versão 1.0 |
-| `32-politica-privacidade.png` | Texto público da política |
-| `33-consulta-dados.png` | Painel com os dados do titular |
-| `34-consentimento-data-versao.png` | Finalidade, data e versão na tela |
-| `35-exportacao-json.png` | Download / conteúdo do JSON |
-| `36-revogacao-consentimento.png` | Consentimento revogado |
-| `37-exclusao-confirmacao.png` | Tela de confirmação da exclusão |
-| `38-exclusao-concluida.png` | Conta removida; login da mesma conta falha |
-| `39-log-lgpd.png` | Trecho de `verbum.log` com eventos da etapa |
+| 22-https-home.png | Site publicado com HTTPS |
+| 23-https-cadeado.png | Conexão segura (TLS) |
+| 24-cadastro-campos.png | Minimização no cadastro |
+| 25-cadastro-sem-consentimento.png | Pendente — recusa sem checkbox |
+| 26-cadastro-com-consentimento.png | Pendente — aceite + versão |
+| 27-politica-privacidade.png | Pendente |
+| 28-consulta-dados.png | Pendente |
+| 29-exportacao-json.png | Pendente |
+| 30-revogacao-consentimento.png | Pendente |
+| 31-exclusao-conta.png | Pendente |
 
 O roteiro passo a passo está em `docs/lgpd-testes.md`.
 
