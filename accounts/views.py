@@ -7,6 +7,7 @@ from django.core.exceptions import ValidationError
 from django.contrib import messages
 from django.utils import timezone
 from datetime import timedelta
+from django.http import JsonResponse
 from .models import UserProfile, ConsentRecord
 from django.contrib.auth import views as auth_views
 from accounts.crypto import encrypt_totp_secret, decrypt_totp_secret
@@ -346,3 +347,88 @@ def politica_privacidade(request):
 		'accounts/politica_privacidade.html',
 		{'policy_version': '1.0'},
 	)
+
+
+@login_required
+def privacidade(request):
+	# Consulta dos dados do titular autenticado (item 4.8)
+	logger.info("Titular consultou os dados pessoais.")
+	ultimo = request.user.consents.first()
+	return render(
+		request,
+		'accounts/privacidade.html',
+		{'ultimo_consentimento': ultimo},
+	)
+
+
+@login_required
+def exportar_dados(request):
+	# Exportação em JSON sem senha, salt ou segredo TOTP (item 4.9)
+	ultimo = request.user.consents.first()
+	payload = {
+		'username': request.user.username,
+		'email': request.user.email,
+		'date_joined': request.user.date_joined.isoformat(),
+		'consentimento': None if ultimo is None else {
+			'finalidade': ultimo.purpose,
+			'concedido': ultimo.granted,
+			'data': ultimo.granted_at.isoformat(),
+			'revogado_em': None if ultimo.revoked_at is None else ultimo.revoked_at.isoformat(),
+			'versao_politica': ultimo.policy_version,
+		},
+	}
+	logger.info("Titular exportou os dados pessoais.")
+	response = JsonResponse(payload, json_dumps_params={'ensure_ascii': False, 'indent': 2})
+	response['Content-Disposition'] = 'attachment; filename="meus-dados-verbum.json"'
+	return response
+
+
+@login_required
+def revogar_consentimento(request):
+	# Revoga ou renova o consentimento (item 4.6)
+	if request.method != 'POST':
+		return redirect('privacidade')
+
+	ultimo = request.user.consents.first()
+	if ultimo is not None and ultimo.granted:
+		ultimo.granted = False
+		ultimo.revoked_at = timezone.now()
+		ultimo.save(update_fields=['granted', 'revoked_at'])
+		logger.info("Titular revogou o consentimento.")
+		messages.success(request, 'Consentimento revogado.')
+	else:
+		ConsentRecord.objects.create(
+			user=request.user,
+			purpose=ConsentRecord.PURPOSE_DEFAULT,
+			granted=True,
+			policy_version='1.0',
+			source='privacidade',
+		)
+		logger.info("Titular renovou o consentimento.")
+		messages.success(request, 'Consentimento renovado (política v1.0).')
+
+	return redirect('privacidade')
+
+
+@login_required
+def excluir_conta(request):
+	# Exclusão da conta com confirmação de e-mail e senha (item 4.10)
+	if request.method != 'POST':
+		return redirect('privacidade')
+
+	email = request.POST.get('email', '')
+	password = request.POST.get('password', '')
+
+	if email.lower() != request.user.email.lower():
+		messages.error(request, 'O e-mail informado não confere.')
+		return redirect('privacidade')
+
+	if authenticate(request, username=request.user.username, password=password) is None:
+		messages.error(request, 'Senha incorreta. A conta não foi excluída.')
+		return redirect('privacidade')
+
+	logger.info("Titular solicitou exclusão da conta.")
+	user = request.user
+	logout(request)
+	user.delete()
+	return render(request, 'accounts/conta_excluida.html')
