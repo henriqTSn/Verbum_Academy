@@ -98,7 +98,7 @@ def login_view(request):
 
 	# A tela de login está na home. Esta rota não renderiza /accounts/login/
 	if request.method != 'POST':
-		return redirect('homePage')
+		return redirect('/')
 
 	# Primeiramente nós pegamos os dados inseridos pelo usuário sendo eles email e senha
 	email = request.POST.get('email')
@@ -112,18 +112,20 @@ def login_view(request):
 
 	if user is not None:
 
-		profile = user.userprofile
+		# CORREÇÃO DO ERRO 500: antes o código fazia "profile = user.userprofile",
+		# que quebra (lança exceção e gera 500) se esse usuário não tiver um
+		# UserProfile associado — o que acontece com contas criadas fora do
+		# fluxo de registro do site (ex: pelo Django Admin ou createsuperuser).
+		# get_or_create busca o perfil e, se não existir, cria um automaticamente
+		# na hora, então o login nunca mais quebra por causa disso.
+		profile, _ = UserProfile.objects.get_or_create(user=user)
 
 		# Verifica se a conta está temporariamente bloqueada
 		if profile.locked_until is not None:
 
 			if timezone.now() < profile.locked_until:
-
-				return render(
-					request,
-					'login.html',
-					{'error': 'Conta temporariamente bloqueada. Tente novamente mais tarde.'}
-				)
+				messages.error(request, 'Conta temporariamente bloqueada. Tente novamente mais tarde.')
+				return redirect('/')
 
 			# Se o período de bloqueio terminou, a conta é liberada
 			profile.locked_until = None
@@ -160,7 +162,6 @@ def login_view(request):
 
 			# Se o 2FA não estiver ativado, o login continua normalmente
 			auth_login(request, authenticated_user)
-
 			return redirect('painel')
 
 		else:
@@ -172,49 +173,43 @@ def login_view(request):
 			if profile.failed_login_attempts >= MAX_LOGIN_ATTEMPTS:
 
 				profile.locked_until = timezone.now() + LOCKOUT_DURATION
-
 				profile.save(
 					update_fields=['failed_login_attempts', 'locked_until']
 				)
-
-				return render(
-					request,
-					'login.html',
-					{'error': 'Conta temporariamente bloqueada. Tente novamente mais tarde.'}
-				)
+				messages.error(request, 'Conta temporariamente bloqueada. Tente novamente mais tarde.')
+				return redirect('/')
 
 			profile.save(
 				update_fields=['failed_login_attempts']
 			)
 
-	return render(
-		request,
-		'login.html',
-		{'error': 'Email ou senha inválidos.'}
-	)
+	messages.error(request, 'Email ou senha inválidos.')
+	return redirect('/')
 
 
 # Diferente das outras funções não coloquei o @login_required aqui pois o usuário ainda não é considerado autenticado pelo Django
 def verify_2fa(request):
+
 	# Aqui pegamos o ID do usuário que passou pela primeira etapa do login que está armazenado em pending_2fa_user_id
 	user_id = request.session.get('pending_2fa_user_id')
 
 	# Se não tem usuário aguardando o 2FA, volta para a home
 	if not user_id:
-		return redirect('homePage')
+		return redirect('/')
 
 	try:
 		user = User.objects.get(id=user_id)
 	except User.DoesNotExist:
 		request.session.pop('pending_2fa_user_id', None)
-		return redirect('homePage')
+		return redirect('/')
 
-	profile = user.userprofile
+	# CORREÇÃO: mesma troca do login_view. "user.userprofile" direto quebraria
+	# com 500 se esse usuário não tivesse UserProfile; get_or_create é seguro.
+	profile, _ = UserProfile.objects.get_or_create(user=user)
 
 	if request.method == 'POST':
 
 		codigo = request.POST.get('codigo', '').strip()
-
 		secret = decrypt_totp_secret(profile.totp_secret)
 		totp = pyotp.TOTP(secret)
 
@@ -225,7 +220,6 @@ def verify_2fa(request):
 
 			# Remove o estado temporário da sessão
 			request.session.pop('pending_2fa_user_id', None)
-
 			return redirect('painel')
 
 		return render(
@@ -246,17 +240,18 @@ def painel(request):
 # Somente um usuário autenticado pode acessar essa página setup2fa.
 @login_required
 def setup_2fa(request):
-	# Essa parte a gente pega o UserProfile associado ao usuário autenticado
-	profile = request.user.userprofile
+
+	# CORREÇÃO: mesma troca das outras funções. Como aqui é
+	# "request.user.userprofile", o mesmo risco de 500 existe caso o usuário
+	# logado não tenha UserProfile. get_or_create resolve isso.
+	profile, _ = UserProfile.objects.get_or_create(user=request.user)
 
 	# Se o usuário não tiver um secret TOTP a condicional é True, cria um secret aleatório encripta ele e salva no banco.
 	# Se o usuário já tiver 2fa a variável secret é descriptografada
 	if not profile.totp_secret:
 		secret = pyotp.random_base32()
-
 		profile.totp_secret = encrypt_totp_secret(secret)
 		profile.save()
-
 	else:
 		secret = decrypt_totp_secret(profile.totp_secret)
 
@@ -272,12 +267,10 @@ def setup_2fa(request):
 		if totp.verify(codigo):
 			profile.two_factor_enabled = True
 			profile.save()
-
 			messages.success(
 				request,
 				'Autenticação em dois fatores ativada com sucesso!'
 			)
-
 			return redirect('painel')
 
 		messages.error(
@@ -304,8 +297,7 @@ def logout_view(request):
 
 	# Encerra a sessão do usuário
 	logout(request)
-
-	return redirect('homePage')
+	return redirect('/')
 
 
 class PasswordResetRequestView(auth_views.PasswordResetView):
@@ -314,7 +306,6 @@ class PasswordResetRequestView(auth_views.PasswordResetView):
 
 		# Aqui faz um registro de solicitação de recuperação de senha recebida, e nenhum token ou link é armazenado no log
 		logger.info('Solicitação de recuperação de senha recebida.')
-
 		return super().form_valid(form)
 
 
@@ -336,11 +327,11 @@ class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
 
 		# Faz o registro de que a recuperação de senha foi concluida mas não adiciona nenhuma senha ou token
 		logger.info('Recuperação de senha concluída com sucesso.')
-
 		return super().form_valid(form)
 
 
 def politica_privacidade(request):
+
 	# Texto público e versionado da política. Não exige login.
 	return render(
 		request,
@@ -351,6 +342,7 @@ def politica_privacidade(request):
 
 @login_required
 def privacidade(request):
+
 	# Consulta dos dados do titular autenticado (item 4.8)
 	logger.info("Titular consultou os dados pessoais.")
 	ultimo = request.user.consents.first()
@@ -363,6 +355,7 @@ def privacidade(request):
 
 @login_required
 def exportar_dados(request):
+
 	# Exportação em JSON sem senha, salt ou segredo TOTP (item 4.9)
 	ultimo = request.user.consents.first()
 	payload = {
@@ -385,6 +378,7 @@ def exportar_dados(request):
 
 @login_required
 def revogar_consentimento(request):
+
 	# Revoga ou renova o consentimento (item 4.6)
 	if request.method != 'POST':
 		return redirect('privacidade')
@@ -412,6 +406,7 @@ def revogar_consentimento(request):
 
 @login_required
 def excluir_conta(request):
+
 	# Exclusão da conta com confirmação de e-mail e senha (item 4.10)
 	if request.method != 'POST':
 		return redirect('privacidade')
