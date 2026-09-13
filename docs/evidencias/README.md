@@ -34,3 +34,13 @@ Os testes foram feitos pelo front-end da aplicação.
 | 19-log-solicitacao.png | 2.6 |
 | 20-log-sucesso.png | 2.7 |
 | 21-log-falha-token.png | 2.7 |
+
+## Etapa 3 — HTTPS e minimização
+
+| Arquivo | Requisito |
+| --- | --- |
+| 22-https-home.png | 3.1 / 3.3 — TLS no ambiente publicado |
+| 23-https-cadeado.png | 3.3 — conexão segura |
+| 24-cadastro-campos.png | 4.3 — minimização de dados |
+
+Ambiente: https://verbum-academy.onrender.com/
