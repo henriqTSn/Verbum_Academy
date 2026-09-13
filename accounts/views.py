@@ -57,6 +57,14 @@ def register(request):
 				{'error': ' '.join(e.messages)}
 			)
 
+		# Sem o aceite da política o cadastro não é criado (consentimento livre, art. 8º)
+		if not request.POST.get('consent'):
+			return render(
+				request,
+				'register.html',
+				{'error': 'É necessário aceitar a Política de Privacidade para criar a conta.'}
+			)
+
 		# A senha não é gravada em texto puro; o Django aplica o hash
 		user = User.objects.create_user(
 			username=username,
@@ -288,6 +296,7 @@ def logout_view(request):
 
 	return redirect('login')
 
+
 class PasswordResetRequestView(auth_views.PasswordResetView):
 
 	def form_valid(self, form):
@@ -296,6 +305,7 @@ class PasswordResetRequestView(auth_views.PasswordResetView):
 		logger.info('Solicitação de recuperação de senha recebida.')
 
 		return super().form_valid(form)
+
 
 class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
 
@@ -317,3 +327,12 @@ class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
 		logger.info('Recuperação de senha concluída com sucesso.')
 
 		return super().form_valid(form)
+
+
+def politica_privacidade(request):
+	# Texto público e versionado da política. Não exige login.
+	return render(
+		request,
+		'accounts/politica_privacidade.html',
+		{'policy_version': '1.0'},
+	)
