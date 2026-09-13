@@ -4,34 +4,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Política de Privacidade v{{ policy_version }} - VERBUM ACADEMY</title>
+    <title>Privacidade - VERBUM ACADEMY</title>
     <link rel="stylesheet" href="{% static 'css/verbum.css' %}">
 </head>
 <body class="register-page">
     <div class="auth-container">
-        <a class="auth-brand" href="{% url 'login' %}"> VERBUM ACADEMY </a>
+        <a class="auth-brand" href="{% url 'painel' %}"> VERBUM ACADEMY </a>
         <main class="register-card">
             <header class="register-header">
-                <h1>Política de Privacidade</h1>
-                <p>Versão {{ policy_version }} — Lei nº 13.709/2018 (LGPD)</p>
+                <h1>Meus dados</h1>
+                <p>Direitos do titular — LGPD</p>
             </header>
 
-            <p>O Verbum trata dados pessoais só para prestar o serviço de conta e aprendizagem.</p>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="register-message {% if message.tags == 'error' %}register-error{% else %}register-success{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
 
-            <p><strong>Dados coletados:</strong> nome de usuário, e-mail, hash da senha, dados opcionais de 2FA e registros de consentimento. Não pedimos CPF, telefone, endereço ou dado sensível.</p>
+            <p><strong>Usuário:</strong> {{ user.username }}</p>
+            <p><strong>E-mail:</strong> {{ user.email }}</p>
+            <p><strong>Conta criada em:</strong> {{ user.date_joined }}</p>
 
-            <p><strong>Finalidade:</strong> criação e gestão da conta, autenticação, recuperação de senha e acompanhamento do aprendizado. Não vendemos dados e não compartilhamos com terceiros nesta versão.</p>
+            {% if ultimo_consentimento %}
+                <p><strong>Consentimento:</strong> {% if ultimo_consentimento.granted %}concedido{% else %}revogado{% endif %}</p>
+                <p><strong>Finalidade:</strong> {{ ultimo_consentimento.purpose }}</p>
+                <p><strong>Data:</strong> {{ ultimo_consentimento.granted_at }}</p>
+                <p><strong>Versão da política:</strong> {{ ultimo_consentimento.policy_version }}</p>
+                {% if ultimo_consentimento.revoked_at %}
+                    <p><strong>Revogado em:</strong> {{ ultimo_consentimento.revoked_at }}</p>
+                {% endif %}
+            {% else %}
+                <p>Nenhum registro de consentimento encontrado.</p>
+            {% endif %}
 
-            <p><strong>Bases legais:</strong> consentimento (art. 7º, I), execução do serviço (art. 7º, V) e segurança da conta (art. 7º, IX).</p>
+            <p>
+                <a href="{% url 'exportar_dados' %}">Exportar meus dados (JSON)</a>
+            </p>
 
-            <p><strong>Seus direitos:</strong> consultar, exportar em JSON, revogar o consentimento e excluir a conta pelo painel de privacidade, com a sessão autenticada.</p>
+            <form method="post" action="{% url 'revogar_consentimento' %}">
+                {% csrf_token %}
+                <button type="submit" class="register-button">
+                    {% if ultimo_consentimento and ultimo_consentimento.granted %}Revogar consentimento{% else %}Renovar consentimento{% endif %}
+                </button>
+            </form>
 
-            <p><strong>Retenção:</strong> enquanto a conta existir. Na exclusão, o usuário e o perfil são removidos. Logs de segurança podem permanecer sem senha e sem token.</p>
+            <hr>
+
+            <h2>Excluir conta</h2>
+            <p>Confirme com o e-mail e a senha atuais. Esta ação apaga a conta e os dados pessoais.</p>
+            <form method="post" action="{% url 'excluir_conta' %}">
+                {% csrf_token %}
+                <div class="register-field">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="register-field">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="register-button">Excluir minha conta</button>
+            </form>
 
             <p class="auth-switch">
-                <a href="{% url 'register' %}">Voltar ao cadastro</a>
+                <a href="{% url 'painel' %}">Voltar ao painel</a>
                 ·
-                <a href="{% url 'login' %}">Entrar</a>
+                <a href="{% url 'politica_privacidade' %}">Política v1.0</a>
             </p>
         </main>
     </div>
