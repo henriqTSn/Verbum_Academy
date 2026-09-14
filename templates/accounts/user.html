@@ -22,7 +22,6 @@
 
     <main class="profile-container">
 
-        <!-- Cabeçalho da página -->
         <header class="profile-header">
 
             <a
@@ -41,7 +40,6 @@
 
         </header>
 
-        <!-- Mensagens enviadas pelo Django -->
         {% if messages %}
             <div aria-live="polite">
                 {% for message in messages %}
@@ -57,10 +55,8 @@
 
         <section class="profile-grid">
 
-            <!-- Resumo do usuário -->
             <aside class="profile-card profile-summary">
 
-                <!-- Primeira letra do nome do usuário -->
                 <div class="profile-avatar">
                     {{ request.user.username|first|upper }}
                 </div>
@@ -117,7 +113,6 @@
 
             </aside>
 
-            <!-- Formulário de edição -->
             <section class="profile-card profile-edit">
 
                 <header class="profile-card-header">
@@ -141,7 +136,6 @@
                 <form method="post" class="profile-form">
                     {% csrf_token %}
 
-                    <!-- Nome -->
                     <div class="profile-field">
 
                         <label for="first_name">
@@ -159,7 +153,6 @@
 
                     </div>
 
-                    <!-- Sobrenome -->
                     <div class="profile-field">
 
                         <label for="last_name">
@@ -177,7 +170,6 @@
 
                     </div>
 
-                    <!-- Nome de usuário -->
                     <div class="profile-field">
 
                         <label for="username">
@@ -198,7 +190,6 @@
 
                     </div>
 
-                    <!-- E-mail -->
                     <div class="profile-field">
 
                         <label for="email">
@@ -217,7 +208,6 @@
 
                     </div>
 
-                    <!-- Idioma estudado -->
                     <div class="profile-field profile-field-full">
 
                         <label for="study_language">

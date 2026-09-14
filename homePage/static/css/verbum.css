@@ -398,7 +398,8 @@ input {
 }
 
 .register-card {
-    padding: 42px;
+    /* Superior | laterais | inferior */
+    padding: 18px 42px 42px;
 
     color: #f8fafc;
     background: #1e293b;
@@ -955,7 +956,8 @@ input {
     }
 
     .register-card {
-        padding: 32px 26px;
+        /* Mantém o título mais próximo também no celular */
+        padding: 24px 26px 32px;
     }
 
     .register-header h1 {
@@ -1553,6 +1555,339 @@ body.auth-page {
     }
 
     .profile-save {
+        width: 100%;
+    }
+}
+
+/* TELA DE CADASTRO — CONSENTIMENTO */
+
+.consent-field {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    margin: 0;
+    padding: 11px 12px;
+
+    background: rgba(15, 23, 42, 0.55);
+    border: 1px solid rgba(125, 211, 252, 0.18);
+    border-radius: 10px;
+}
+
+/* Checkbox menor e alinhado à esquerda */
+
+.consent-field input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+
+    margin: 2px 0 0;
+    padding: 0;
+
+    accent-color: #7dd3fc;
+    cursor: pointer;
+}
+
+/* Texto do consentimento */
+
+.consent-field label {
+    margin: 0;
+
+    color: #94a3b8;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 1.45;
+
+    cursor: pointer;
+}
+
+/* Link da política */
+
+.consent-field a {
+    color: #7dd3fc;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.consent-field a:hover {
+    text-decoration: underline;
+}
+
+/* Destaque para navegação pelo teclado */
+
+.consent-field input[type="checkbox"]:focus-visible {
+    outline: 2px solid #7dd3fc;
+    outline-offset: 3px;
+}
+
+/* TELA DE CADASTRO ALTERAÇÃO PQ DO CHECK BOX */
+
+@media (min-width: 481px) {
+
+    body.register-page {
+        padding: 16px 32px;
+        align-items: center;
+    }
+
+    /* Caixa um pouco mais larga */
+
+    .register-page .auth-container {
+        width: min(100%, 480px);
+        gap: 14px;
+    }
+
+    /* Mantém os campos em uma única coluna */
+
+    .register-page .register-form {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    /* Espaçamento interno do cartão */
+
+    .register-page .register-card {
+        padding: 20px 34px 16px;
+    }
+
+    /* Cabeçalho mais próximo dos campos */
+
+    .register-page .register-header {
+        margin-bottom: 16px;
+    }
+
+    .register-page .register-header h1 {
+        margin-bottom: 4px;
+    }
+
+    /* Campos confortáveis */
+
+    .register-page .register-field {
+        gap: 5px;
+    }
+
+    .register-page .register-field input {
+        height: 46px;
+    }
+
+    /* Consentimento */
+
+    .register-page .consent-field {
+        margin: 0;
+        padding: 9px 11px;
+    }
+
+    /* Botão */
+
+    .register-page .register-button {
+        height: 47px;
+        margin-top: 2px;
+    }
+
+    /* Link próximo da borda inferior */
+
+    .register-page .auth-switch {
+        margin: 9px 0 0;
+    }
+}
+
+/* TELA DE POLÍTICA DE PRIVACIDADE */
+
+/* começa no topo */
+
+body.privacy-page {
+    align-items: flex-start;
+    padding: 28px 20px;
+    overflow-x: hidden;
+}
+
+/* Deixa a política mais larga do que o cadastro */
+
+.privacy-page .privacy-container {
+    width: min(100%, 780px);
+    gap: 18px;
+}
+
+/* Cartão principal da política */
+
+.privacy-page .privacy-card {
+    width: 100%;
+    padding: 34px 40px;
+}
+
+/* Cabeçalho */
+
+.privacy-page .privacy-header {
+    margin-bottom: 22px;
+}
+
+.privacy-page .privacy-header h1 {
+    margin: 5px 0 7px;
+
+    color: #f8fafc;
+    font-size: 30px;
+    line-height: 1.2;
+}
+
+/* Texto azul acima do título */
+
+.privacy-tag {
+    margin: 0;
+
+    color: #7dd3fc;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+/* Número da versão e referência à LGPD */
+
+.privacy-version {
+    margin: 0;
+
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+/* Resumo apresentado no início */
+
+.privacy-introduction {
+    margin: 0 0 6px;
+    padding: 15px 17px;
+
+    color: #cbd5e1;
+    background: rgba(15, 23, 42, 0.55);
+
+    border-left: 4px solid #7dd3fc;
+    border-radius: 8px;
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Cada assunto da política */
+
+.privacy-section {
+    padding: 18px 2px;
+
+    border-bottom: 1px solid rgba(125, 211, 252, 0.13);
+}
+
+.privacy-section h2 {
+    margin: 0 0 7px;
+
+    color: #f8fafc;
+    font-size: 17px;
+}
+
+.privacy-section p {
+    margin: 0;
+
+    color: #cbd5e1;
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+/* Área dos botões inferiores */
+
+.privacy-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+
+    margin-top: 24px;
+}
+
+/* Formato compartilhado pelos dois links */
+
+.privacy-action {
+    min-height: 44px;
+    padding: 0 20px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #7dd3fc;
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: bold;
+    text-decoration: none;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+/* Botão principal */
+
+.privacy-action-primary {
+    color: #0f172a;
+    background: #7dd3fc;
+}
+
+/* Botão secundário */
+
+.privacy-action-secondary {
+    color: #7dd3fc;
+    background: transparent;
+}
+
+/* Efeito ao passar o mouse */
+
+.privacy-action:hover {
+    transform: translateY(-1px);
+}
+
+.privacy-action-primary:hover {
+    background: #bae6fd;
+}
+
+.privacy-action-secondary:hover {
+    color: #0f172a;
+    background: #7dd3fc;
+}
+
+/* Destaque para navegação pelo teclado */
+
+.privacy-action:focus-visible {
+    outline: 3px solid rgba(125, 211, 252, 0.45);
+    outline-offset: 3px;
+}
+
+/* POLÍTICA DE PRIVACIDADE — CELULAR */
+
+@media (max-width: 600px) {
+
+    body.privacy-page {
+        padding: 18px 14px;
+    }
+
+    .privacy-page .privacy-container {
+        gap: 16px;
+    }
+
+    .privacy-page .privacy-card {
+        padding: 26px 20px;
+    }
+
+    .privacy-page .privacy-header h1 {
+        font-size: 25px;
+    }
+
+    .privacy-section {
+        padding: 16px 0;
+    }
+
+    /* Coloca os botões um abaixo do outro */
+
+    .privacy-actions {
+        flex-direction: column;
+    }
+
+    .privacy-action {
         width: 100%;
     }
 }

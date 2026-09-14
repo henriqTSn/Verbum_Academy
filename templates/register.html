@@ -73,16 +73,23 @@
                         required
                     >
                 </div>
-                <div class="register-field">
-                    <label>
-                        <input type="checkbox" name="consent" value="1">
+
+                <div class="consent-field">
+                    <input type="checkbox" id="consent" name="consent" value="1" required>
+
+                    <label for="consent">
                         Li e aceito a
-                        <a href="{% url 'politica_privacidade' %}" target="_blank" rel="noopener">
+                        <a
+                            href="{% url 'politica_privacidade' %}"
+                            target="_blank"
+                            rel="noopener"
+                        >
                             Política de Privacidade v1.0
                         </a>
-                        para criar e gerenciar minha conta no Verbum.
+                        para criar e gerenciar minha conta no VERBUM ACADEMY.
                     </label>
                 </div>
+
                 <button type="submit" class="register-button">
                     Cadastrar
                 </button>
