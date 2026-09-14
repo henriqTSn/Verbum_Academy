@@ -186,6 +186,10 @@ def login_view(request):
 	messages.error(request, 'Email ou senha inválidos.')
 	return redirect('/')
 
+# tela de perfil do usuario
+@login_required(login_url="homePage")
+def perfil(request):
+    return render(request, "accounts/user.html")
 
 # Diferente das outras funções não coloquei o @login_required aqui pois o usuário ainda não é considerado autenticado pelo Django
 def verify_2fa(request):

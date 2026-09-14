@@ -18,4 +18,5 @@ urlpatterns = [
 	path('privacidade/exportar/', views.exportar_dados, name='exportar_dados'),
 	path('privacidade/consentimento/', views.revogar_consentimento, name='revogar_consentimento'),
 	path('privacidade/excluir/', views.excluir_conta, name='excluir_conta'),
+    path("perfil/", views.perfil, name="perfil"),
 ]
