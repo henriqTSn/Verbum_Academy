@@ -19,7 +19,19 @@ Pasta de requisitos, escopo, segurança e evidências do Projeto Integrador — 
 | [evidencias/](evidencias) | Capturas de tela dos testes |
 | Projeto Integrador.pdf | Enunciado da disciplina |
 | Requisitos(2).pdf | Rubrica / checklist oficial de avaliação |
+| auditoria-eventos.md | Eventos que a etapa de logs deve gravar |
+| auditoria-logs.md | Etapa 4: auditoria, proteção do log e análise |
 
 ## Status da documentação
 
-A etapa atual cobre autenticação, recuperação de senha e conformidade com a LGPD (itens 4.1 a 4.11 do checklist). HTTPS de produção permanece na seção 3 da rubrica.
+Já documentado:
+
+- autenticação e gestão de credenciais
+- recuperação de senha
+- conformidade com a LGPD (itens 4.1 a 4.11)
+- especificação de auditoria e logs (itens 5.1 a 5.4)
+
+Pendente de evidência no front-end e de gravação no `verbum.log`:
+
+- LOGIN_SUCCESS, LOGIN_FAILURE, ACCOUNT_LOCKED, LOGOUT, 2FA_SUCCESS e 2FA_FAILURE
+
