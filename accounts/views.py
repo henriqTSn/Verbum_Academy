@@ -9,23 +9,28 @@ from django.utils import timezone
 from datetime import timedelta
 from django.http import JsonResponse
 from django.conf import settings
+from pathlib import Path
 from .models import UserProfile, ConsentRecord
 from django.contrib.auth import views as auth_views
 from accounts.crypto import encrypt_totp_secret, decrypt_totp_secret
 import pyotp
 import logging
 
+# Logger do app accounts. A configuração em Verbum/settings.py
+# grava estas linhas no arquivo verbum.log (modo append).
 logger = logging.getLogger(__name__)
 
-# Máximo de tentativas
+# Máximo de tentativas de senha errada antes do bloqueio temporário
 MAX_LOGIN_ATTEMPTS = 5
 
-# Duração do bloqueio
+# Duração do bloqueio após atingir o limite de tentativas
 LOCKOUT_DURATION = timedelta(minutes=5)
 
 
 def _client_ip(request):
-	# IP do cliente para o registro de auditoria
+	# IP do cliente para o registro de auditoria.
+	# Em produção atrás de proxy o Render pode enviar X-Forwarded-For;
+	# REMOTE_ADDR já atende o requisito da etapa.
 	return request.META.get('REMOTE_ADDR', '-')
 
 
@@ -51,9 +56,7 @@ def audit_log(request, event, success, message, user=None, email=None):
 
 
 def register(request):
-
 	if request.method == 'POST':
-
 		username = request.POST.get('username')
 		email = request.POST.get('email')
 		password = request.POST.get('password')
@@ -122,7 +125,6 @@ def register(request):
 
 
 def login_view(request):
-
 	# A tela de login está na home. Esta rota não renderiza /accounts/login/
 	if request.method != 'POST':
 		return redirect('/')
@@ -138,7 +140,6 @@ def login_view(request):
 		user = None
 
 	if user is not None:
-
 		# CORREÇÃO DO ERRO 500: antes o código fazia "profile = user.userprofile",
 		# que quebra (lança exceção e gera 500) se esse usuário não tiver um
 		# UserProfile associado — o que acontece com contas criadas fora do
@@ -149,7 +150,6 @@ def login_view(request):
 
 		# Verifica se a conta está temporariamente bloqueada
 		if profile.locked_until is not None:
-
 			if timezone.now() < profile.locked_until:
 				# Auditoria: tentativa enquanto a conta ainda está bloqueada
 				audit_log(
@@ -179,7 +179,6 @@ def login_view(request):
 
 		# Essa parte é a que cria a sessão de autenticação do usuário e redireciona o usuário para a página painel após o login.
 		if authenticated_user is not None:
-
 			# A senha está correta, então zeramos as tentativas anteriores
 			profile.failed_login_attempts = 0
 			profile.locked_until = None
@@ -199,10 +198,8 @@ def login_view(request):
 
 			# Se o usuário possui 2FA ativado, ainda não fazemos o login
 			if profile.two_factor_enabled:
-
 				# Guardamos temporariamente o ID do usuário na sessão
 				request.session['pending_2fa_user_id'] = authenticated_user.id
-
 				# Enviamos o usuário para a tela de validação do 2FA
 				return redirect('verify_2fa')
 
@@ -211,13 +208,11 @@ def login_view(request):
 			return redirect('painel')
 
 		else:
-
 			# A senha informada está incorreta
 			profile.failed_login_attempts += 1
 
 			# Se atingir o limite, a conta é bloqueada temporariamente
 			if profile.failed_login_attempts >= MAX_LOGIN_ATTEMPTS:
-
 				profile.locked_until = timezone.now() + LOCKOUT_DURATION
 				profile.save(
 					update_fields=['failed_login_attempts', 'locked_until']
@@ -269,15 +264,14 @@ def login_view(request):
 	return redirect('/')
 
 
-# tela de perfil do usuario
+# Tela de perfil do usuário autenticado
 @login_required(login_url="homePage")
 def perfil(request):
-    return render(request, "accounts/user.html")
+	return render(request, "accounts/user.html")
 
 
 # Diferente das outras funções não coloquei o @login_required aqui pois o usuário ainda não é considerado autenticado pelo Django
 def verify_2fa(request):
-
 	# Aqui pegamos o ID do usuário que passou pela primeira etapa do login que está armazenado em pending_2fa_user_id
 	user_id = request.session.get('pending_2fa_user_id')
 
@@ -296,13 +290,11 @@ def verify_2fa(request):
 	profile, _ = UserProfile.objects.get_or_create(user=user)
 
 	if request.method == 'POST':
-
 		codigo = request.POST.get('codigo', '').strip()
 		secret = decrypt_totp_secret(profile.totp_secret)
 		totp = pyotp.TOTP(secret)
 
 		if totp.verify(codigo):
-
 			# O segundo fator foi validado
 			auth_login(request, user)
 
@@ -347,7 +339,6 @@ def painel(request):
 # Somente um usuário autenticado pode acessar essa página setup2fa.
 @login_required
 def setup_2fa(request):
-
 	# CORREÇÃO: mesma troca das outras funções. Como aqui é
 	# "request.user.userprofile", o mesmo risco de 500 existe caso o usuário
 	# logado não tenha UserProfile. get_or_create resolve isso.
@@ -365,4 +356,195 @@ def setup_2fa(request):
 	totp = pyotp.TOTP(secret)
 
 	# Se o usuário enviar o formulário nós entramos nesta parte POST /accounts/setup2fa/
-	if 
+	if request.method == 'POST':
+		# Aqui pegamos o código digitado pelo usuário
+		codigo = request.POST.get('codigo', '').strip()
+
+		# Faz a verificação do código, se for True entra nessa condicional, habilita 2FA e salva.
+		if totp.verify(codigo):
+			profile.two_factor_enabled = True
+			profile.save()
+			messages.success(
+				request,
+				'Autenticação em dois fatores ativada com sucesso!'
+			)
+			return redirect('painel')
+
+		messages.error(
+			request,
+			'Código inválido. Tente novamente.'
+		)
+
+	provisioning_uri = totp.provisioning_uri(
+		name=request.user.email,
+		issuer_name='Verbum'
+	)
+
+	return render(
+		request,
+		'accounts/setup_2fa.html',
+		{
+			'secret': secret,
+			'provisioning_uri': provisioning_uri,
+		}
+	)
+
+
+def logout_view(request):
+	# Auditoria do encerramento de sessão (item 5.1).
+	# Precisa gravar ANTES do logout, senão o usuário já não está autenticado.
+	# Senha e token não entram no registro.
+	if request.user.is_authenticated:
+		audit_log(
+			request,
+			event='LOGOUT',
+			success=True,
+			message='Sessão encerrada pelo usuário.',
+			user=request.user,
+			email=request.user.email,
+		)
+
+	# Encerra a sessão do usuário
+	logout(request)
+	return redirect('/')
+
+
+class PasswordResetRequestView(auth_views.PasswordResetView):
+
+	def form_valid(self, form):
+		# Registro de solicitação de recuperação. Nenhum token ou link vai para o log.
+		logger.info('Solicitação de recuperação de senha recebida.')
+		return super().form_valid(form)
+
+
+class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
+
+	# Assim que o usuário abrir o link, o Django verifica o token de recuperação
+	def dispatch(self, request, *args, **kwargs):
+		response = super().dispatch(request, *args, **kwargs)
+
+		# Se o Django identificar que o link contém um token inválido ou expirado, registra a tentativa
+		if getattr(response, 'context_data', {}).get('validlink') is False:
+			logger.warning('Tentativa de recuperação de senha com token inválido ou expirado.')
+
+		return response
+
+	# Assim que o usuário digitar duas senhas iguais no link contendo o token o Django chama esse método
+	def form_valid(self, form):
+		# Faz o registro de que a recuperação de senha foi concluída, sem gravar senha ou token
+		logger.info('Recuperação de senha concluída com sucesso.')
+		return super().form_valid(form)
+
+
+def politica_privacidade(request):
+	# Texto público e versionado da política. Não exige login.
+	return render(
+		request,
+		'accounts/politica_privacidade.html',
+		{'policy_version': '1.0'},
+	)
+
+
+@login_required
+def privacidade(request):
+	# Consulta dos dados do titular autenticado (item 4.8)
+	logger.info("Titular consultou os dados pessoais.")
+	ultimo = request.user.consents.first()
+	return render(
+		request,
+		'accounts/privacidade.html',
+		{'ultimo_consentimento': ultimo},
+	)
+
+
+@login_required
+def exportar_dados(request):
+	# Exportação em JSON sem senha, salt ou segredo TOTP (item 4.9)
+	ultimo = request.user.consents.first()
+	payload = {
+		'username': request.user.username,
+		'email': request.user.email,
+		'date_joined': request.user.date_joined.isoformat(),
+		'consentimento': None if ultimo is None else {
+			'finalidade': ultimo.purpose,
+			'concedido': ultimo.granted,
+			'data': ultimo.granted_at.isoformat(),
+			'revogado_em': None if ultimo.revoked_at is None else ultimo.revoked_at.isoformat(),
+			'versao_politica': ultimo.policy_version,
+		},
+	}
+	logger.info("Titular exportou os dados pessoais.")
+	response = JsonResponse(payload, json_dumps_params={'ensure_ascii': False, 'indent': 2})
+	response['Content-Disposition'] = 'attachment; filename="meus-dados-verbum.json"'
+	return response
+
+
+@login_required
+def revogar_consentimento(request):
+	# Revoga ou renova o consentimento (item 4.6)
+	if request.method != 'POST':
+		return redirect('privacidade')
+
+	ultimo = request.user.consents.first()
+	if ultimo is not None and ultimo.granted:
+		ultimo.granted = False
+		ultimo.revoked_at = timezone.now()
+		ultimo.save(update_fields=['granted', 'revoked_at'])
+		logger.info("Titular revogou o consentimento.")
+		messages.success(request, 'Consentimento revogado.')
+	else:
+		ConsentRecord.objects.create(
+			user=request.user,
+			purpose=ConsentRecord.PURPOSE_DEFAULT,
+			granted=True,
+			policy_version='1.0',
+			source='privacidade',
+		)
+		logger.info("Titular renovou o consentimento.")
+		messages.success(request, 'Consentimento renovado (política v1.0).')
+
+	return redirect('privacidade')
+
+
+@login_required
+def excluir_conta(request):
+	# Exclusão da conta com confirmação de e-mail e senha (item 4.10)
+	if request.method != 'POST':
+		return redirect('privacidade')
+
+	email = request.POST.get('email', '')
+	password = request.POST.get('password', '')
+
+	if email.lower() != request.user.email.lower():
+		messages.error(request, 'O e-mail informado não confere.')
+		return redirect('privacidade')
+
+	if authenticate(request, username=request.user.username, password=password) is None:
+		messages.error(request, 'Senha incorreta. A conta não foi excluída.')
+		return redirect('privacidade')
+
+	logger.info("Titular solicitou exclusão da conta.")
+	user = request.user
+	logout(request)
+	user.delete()
+	return render(request, 'accounts/conta_excluida.html')
+
+
+@login_required
+def auditoria_logs(request):
+	# Consulta somente leitura do verbum.log (itens 5.3 e 5.4).
+	# Esta tela não edita, não apaga e não grava linhas.
+	# Senha, token, código 2FA e secret TOTP não aparecem no arquivo.
+	log_path = Path(settings.BASE_DIR) / 'verbum.log'
+	linhas = []
+
+	if log_path.exists():
+		with log_path.open(encoding='utf-8', errors='replace') as arquivo:
+			# Mostra as últimas 200 linhas para a análise na tela
+			linhas = arquivo.read().splitlines()[-200:]
+
+	return render(
+		request,
+		'accounts/auditoria_logs.html',
+		{'linhas': linhas},
+	)
