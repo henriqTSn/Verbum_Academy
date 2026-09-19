@@ -81,3 +81,30 @@ INFO ACCOUNT_LOCKED email=aluno@email.com
 INFO 2FA_FAILURE email=aluno@email.com
 INFO 2FA_SUCCESS email=aluno@email.com
 INFO LOGOUT email=aluno@email.com
+
+## Implementação
+
+Função `audit_log()` em `accounts/views.py`.
+Chamada em `login_view()`, `verify_2fa()` e `logout_view()`.
+A home encaminha o POST do login para `login_view()`.
+Consulta: `GET /accounts/auditoria/` (sem POST, sem apagar, sem editar).
+
+## Evidências de front-end
+
+- `33-2fa-falha.png` — código 2FA inválido
+- `34-2fa-sucesso.png` — painel após 2FA válido
+- `35-logout.png` — sessão encerrada
+- `36-tela-auditoria.png` — consulta somente leitura do log
+- `32-conta-bloqueada.png` — bloqueio após 5 tentativas
+
+## Exemplo de análise (5.4)
+
+Trecho esperado no `verbum.log` após os testes no front-end:
+
+```text
+event=LOGIN_FAILURE success=false email=marciamazoni@gmail.com message=Falha na autenticação primária.
+event=ACCOUNT_LOCKED success=false email=marciamazoni@gmail.com message=Conta bloqueada por excesso de tentativas.
+event=LOGIN_SUCCESS success=true email=marciamazoni@gmail.com message=Autenticação primária concluída com sucesso.
+event=2FA_FAILURE success=false email=marciamazoni@gmail.com message=Falha na validação de 2FA.
+event=2FA_SUCCESS success=true email=marciamazoni@gmail.com message=Validação de 2FA concluída com sucesso.
+event=LOGOUT success=true email=marciamazoni@gmail.com message=Sessão encerrada pelo usuário.
