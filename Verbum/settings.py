@@ -128,22 +128,36 @@ CSRF_TRUSTED_ORIGINS = [
 	for origin in os.environ.get('CSRF_TRUSTED_ORIGINS', '').split(',')
 	if origin.strip()
 ]
-# Este código é relacionado ao logging de atividade do usuário
+# Registro de auditoria: eventos críticos de segurança vão para o arquivo verbum.log
+# mode='a' significa que o sistema só acrescenta linhas novas e não apaga o histórico
 LOGGING = {
 	'version': 1,
 	'disable_existing_loggers': False,
-	# Aqui escrevi que os logs serão guardados em verbum.log
+	# Formato de cada linha: data, hora, nível e mensagem
+	'formatters': {
+		'audit': {
+			'format': '{asctime} {levelname} {message}',
+			'style': '{',
+		},
+	},
+	# Destinos do log: arquivo na raiz do projeto e console (Render)
 	'handlers': {
 		'file': {
 			'class': 'logging.FileHandler',
 			'filename': BASE_DIR / 'verbum.log',
+			'mode': 'a',
+			'encoding': 'utf-8',
+			'formatter': 'audit',
+		},
+		'console': {
+			'class': 'logging.StreamHandler',
+			'formatter': 'audit',
 		},
 	},
-	# Aqui diz de onde os logs vão vir, que no caso é de accounts
+	# Os eventos saem do app accounts, no nível INFO
 	'loggers': {
 		'accounts': {
-			'handlers': ['file'],
-			# Registrar eventos de nível INFO
+			'handlers': ['file', 'console'],
 			'level': 'INFO',
 			'propagate': False,
 		},
@@ -152,7 +166,6 @@ LOGGING = {
 # Chave usada para criptografar os segredos totp
 # Essa chave é fornecida pelo ambiente e não fica armazenada no código
 VERBUM_ENCRYPTION_KEY = os.environ['VERBUM_ENCRYPTION_KEY']
-
 # Login pela home, para o professor não cair em /accounts/login/
 LOGIN_URL = "/"
 LOGIN_REDIRECT_URL = "/accounts/painel/"
