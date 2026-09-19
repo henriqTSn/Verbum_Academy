@@ -19,8 +19,8 @@ Pasta de requisitos, escopo, segurança e evidências do Projeto Integrador — 
 | [evidencias/](evidencias) | Capturas de tela dos testes |
 | Projeto Integrador.pdf | Enunciado da disciplina |
 | Requisitos(2).pdf | Rubrica / checklist oficial de avaliação |
-| auditoria-eventos.md | Eventos que a etapa de logs deve gravar |
-| auditoria-logs.md | Etapa 4: auditoria, proteção do log e análise |
+| [auditoria-eventos.md](auditoria-eventos.md) | Eventos que a etapa de logs deve gravar |
+| [auditoria-logs.md](auditoria-logs.md) | Etapa 4: auditoria, proteção do log e análise |
 
 ## Status da documentação
 
