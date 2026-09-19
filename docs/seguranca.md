@@ -128,3 +128,13 @@ A perda da chave impossibilita a descriptografia dos dados protegidos por ela. P
 - Política pública versionada em `/accounts/politica-privacidade/`.
 
 Documentação: `docs/lgpd.md`.
+
+## Auditoria e Logs
+
+Os eventos críticos de segurança desta etapa são gravados no arquivo `verbum.log`, configurado em `Verbum/settings.py`.
+
+- o log é escrito apenas pela aplicação
+- não há tela para alterar ou apagar o arquivo
+- senha, token, código 2FA e secret TOTP não entram no log
+
+Detalhamento: `docs/auditoria-logs.md`.
