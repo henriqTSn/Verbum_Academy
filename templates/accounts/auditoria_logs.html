@@ -9,7 +9,7 @@
 </head>
 <body class="register-page">
     <div class="auth-container">
-        <a class="auth-brand" href="{% url 'painel' %}"> VERBUM ACADEMY </a>
+        <a class="auth-brand" href="{% url 'painel' %}">VERBUM ACADEMY</a>
         <main class="register-card">
             <header class="register-header">
                 <h1>Auditoria e Logs</h1>
@@ -20,8 +20,8 @@
             <p>Senha, token, código 2FA e secret TOTP não entram no registro.</p>
 
             {% if linhas %}
-                <pre style="white-space: pre-wrap; word-break: break-word; font-size: 0.85rem; background: #111; color: #d6f5d6; padding: 1rem; border-radius: 8px; max-height: 28rem; overflow: auto;">{{ linhas|join:"
-" }}</pre>
+                <pre style="white-space: pre-wrap; word-break: break-word; font-size: 0.85rem; background: #111; color: #d6f5d6; padding: 1rem; border-radius: 8px; max-height: 28rem; overflow: auto;">{% for linha in linhas %}{{ linha }}
+{% endfor %}</pre>
             {% else %}
                 <p>Nenhum evento registrado ainda. Faça login, 2FA e logout pelo site e atualize esta página.</p>
             {% endif %}
