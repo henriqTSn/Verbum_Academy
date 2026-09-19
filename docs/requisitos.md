@@ -161,11 +161,15 @@ As evidências estão em `docs/evidencias`. Os testes foram feitos pelo front-en
 
 ## 11. Auditoria e Logs
 
+**Status:** Implementado
+
+Eventos gravados em `verbum.log` pela função `audit_log()` em `accounts/views.py`.
+Nenhum registro contém senha, token, código 2FA, secret TOTP ou hash.
+A tela `/accounts/auditoria/` é somente leitura (item 5.3).
+
 | Requisito | Status | Evidência |
 |---|---|---|
-| 5.1 Logs de autenticação registrados | Especificado | docs/auditoria-eventos.md e docs/auditoria-logs.md |
-| 5.2 Logs de falhas e 2FA registrados | Especificado | docs/auditoria-eventos.md e docs/auditoria-logs.md |
-| 5.3 Proteção contra alteração dos logs | Documentado | verbum.log gerado pela aplicação, sem edição na interface |
-| 5.4 Exemplo de análise de logs apresentado | Documentado (exemplo-modelo) | docs/auditoria-logs.md |
-
-Observação: a gravação de login, logout e 2FA no `verbum.log` e os prints do front-end ainda serão anexados.
+| 5.1 Logs de autenticação registrados | Implementado | `34-2fa-sucesso.png`, `35-logout.png`, `docs/auditoria-logs.md` |
+| 5.2 Logs de falhas e 2FA registrados | Implementado | `33-2fa-falha.png`, `32-conta-bloqueada.png` |
+| 5.3 Proteção contra alteração dos logs | Implementado | tela somente leitura, arquivo em modo append, sem edição |
+| 5.4 Exemplo de análise de logs apresentado | Implementado | seção 5.4 de `docs/auditoria-logs.md` + `36-tela-auditoria.png` |
