@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.utils import timezone
 from datetime import timedelta
 from django.http import JsonResponse
+from django.conf import settings
 from .models import UserProfile, ConsentRecord
 from django.contrib.auth import views as auth_views
 from accounts.crypto import encrypt_totp_secret, decrypt_totp_secret
@@ -21,6 +22,32 @@ MAX_LOGIN_ATTEMPTS = 5
 
 # Duração do bloqueio
 LOCKOUT_DURATION = timedelta(minutes=5)
+
+
+def _client_ip(request):
+	# IP do cliente para o registro de auditoria
+	return request.META.get('REMOTE_ADDR', '-')
+
+
+def audit_log(request, event, success, message, user=None, email=None):
+	# Grava evento crítico em verbum.log.
+	# Não registra senha, token, código 2FA, secret TOTP ou hash.
+	if user is not None:
+		user_id = getattr(user, 'id', '-')
+		email = email or getattr(user, 'email', '-')
+	else:
+		user_id = '-'
+		email = email or '-'
+
+	logger.info(
+		'event=%s success=%s user_id=%s email=%s ip=%s message=%s',
+		event,
+		str(success).lower(),
+		user_id,
+		email,
+		_client_ip(request),
+		message,
+	)
 
 
 def register(request):
@@ -124,6 +151,15 @@ def login_view(request):
 		if profile.locked_until is not None:
 
 			if timezone.now() < profile.locked_until:
+				# Auditoria: tentativa enquanto a conta ainda está bloqueada
+				audit_log(
+					request,
+					event='ACCOUNT_LOCKED',
+					success=False,
+					message='Conta bloqueada por excesso de tentativas.',
+					user=user,
+					email=user.email,
+				)
 				messages.error(request, 'Conta temporariamente bloqueada. Tente novamente mais tarde.')
 				return redirect('/')
 
@@ -151,6 +187,16 @@ def login_view(request):
 				update_fields=['failed_login_attempts', 'locked_until']
 			)
 
+			# Auditoria: autenticação primária concluída (ainda pode faltar o 2FA)
+			audit_log(
+				request,
+				event='LOGIN_SUCCESS',
+				success=True,
+				message='Autenticação primária concluída com sucesso.',
+				user=authenticated_user,
+				email=authenticated_user.email,
+			)
+
 			# Se o usuário possui 2FA ativado, ainda não fazemos o login
 			if profile.two_factor_enabled:
 
@@ -176,20 +222,58 @@ def login_view(request):
 				profile.save(
 					update_fields=['failed_login_attempts', 'locked_until']
 				)
+				# Auditoria: senha errada e limite de tentativas atingido
+				audit_log(
+					request,
+					event='LOGIN_FAILURE',
+					success=False,
+					message='Falha na autenticação primária.',
+					user=user,
+					email=user.email,
+				)
+				audit_log(
+					request,
+					event='ACCOUNT_LOCKED',
+					success=False,
+					message='Conta bloqueada por excesso de tentativas.',
+					user=user,
+					email=user.email,
+				)
 				messages.error(request, 'Conta temporariamente bloqueada. Tente novamente mais tarde.')
 				return redirect('/')
 
 			profile.save(
 				update_fields=['failed_login_attempts']
 			)
+			# Auditoria: senha errada, ainda sem bloqueio
+			audit_log(
+				request,
+				event='LOGIN_FAILURE',
+				success=False,
+				message='Falha na autenticação primária.',
+				user=user,
+				email=user.email,
+			)
+
+	else:
+		# Auditoria: e-mail inexistente (mesma mensagem da senha errada)
+		audit_log(
+			request,
+			event='LOGIN_FAILURE',
+			success=False,
+			message='Falha na autenticação primária.',
+			email=email or '-',
+		)
 
 	messages.error(request, 'Email ou senha inválidos.')
 	return redirect('/')
+
 
 # tela de perfil do usuario
 @login_required(login_url="homePage")
 def perfil(request):
     return render(request, "accounts/user.html")
+
 
 # Diferente das outras funções não coloquei o @login_required aqui pois o usuário ainda não é considerado autenticado pelo Django
 def verify_2fa(request):
@@ -222,10 +306,29 @@ def verify_2fa(request):
 			# O segundo fator foi validado
 			auth_login(request, user)
 
+			# Auditoria: TOTP válido. O código digitado NÃO entra no log.
+			audit_log(
+				request,
+				event='2FA_SUCCESS',
+				success=True,
+				message='Validação de 2FA concluída com sucesso.',
+				user=user,
+				email=user.email,
+			)
+
 			# Remove o estado temporário da sessão
 			request.session.pop('pending_2fa_user_id', None)
 			return redirect('painel')
 
+		# Auditoria: TOTP inválido. O código digitado NÃO entra no log.
+		audit_log(
+			request,
+			event='2FA_FAILURE',
+			success=False,
+			message='Falha na validação de 2FA.',
+			user=user,
+			email=user.email,
+		)
 		return render(
 			request,
 			'verify_2fa.html',
@@ -262,172 +365,4 @@ def setup_2fa(request):
 	totp = pyotp.TOTP(secret)
 
 	# Se o usuário enviar o formulário nós entramos nesta parte POST /accounts/setup2fa/
-	if request.method == 'POST':
-
-		# Aqui pegamos o código digitado pelo usuário
-		codigo = request.POST.get('codigo', '').strip()
-
-		# Faz a verificação do código, se for True entra nessa condicional, habilita 2FA e salva.
-		if totp.verify(codigo):
-			profile.two_factor_enabled = True
-			profile.save()
-			messages.success(
-				request,
-				'Autenticação em dois fatores ativada com sucesso!'
-			)
-			return redirect('painel')
-
-		messages.error(
-			request,
-			'Código inválido. Tente novamente.'
-		)
-
-	provisioning_uri = totp.provisioning_uri(
-		name=request.user.email,
-		issuer_name='Verbum'
-	)
-
-	return render(
-		request,
-		'accounts/setup_2fa.html',
-		{
-			'secret': secret,
-			'provisioning_uri': provisioning_uri,
-		}
-	)
-
-
-def logout_view(request):
-
-	# Encerra a sessão do usuário
-	logout(request)
-	return redirect('/')
-
-
-class PasswordResetRequestView(auth_views.PasswordResetView):
-
-	def form_valid(self, form):
-
-		# Aqui faz um registro de solicitação de recuperação de senha recebida, e nenhum token ou link é armazenado no log
-		logger.info('Solicitação de recuperação de senha recebida.')
-		return super().form_valid(form)
-
-
-class PasswordResetConfirmView(auth_views.PasswordResetConfirmView):
-
-	# Assim que o usuário enviar a solicitação, o django verifica o token de recuperação
-	def dispatch(self, request, *args, **kwargs):
-
-		response = super().dispatch(request, *args, **kwargs)
-
-		# Se o django identificar que o link contém um token inválido ou expirado, registra a tentativa
-		if getattr(response, 'context_data', {}).get('validlink') is False:
-			logger.warning('Tentativa de recuperação de senha com token inválido ou expirado.')
-
-		return response
-
-	# Assim que o usuário digitar duas senhas iguais no link contendo o token o django chama esse método
-	def form_valid(self, form):
-
-		# Faz o registro de que a recuperação de senha foi concluida mas não adiciona nenhuma senha ou token
-		logger.info('Recuperação de senha concluída com sucesso.')
-		return super().form_valid(form)
-
-
-def politica_privacidade(request):
-
-	# Texto público e versionado da política. Não exige login.
-	return render(
-		request,
-		'accounts/politica_privacidade.html',
-		{'policy_version': '1.0'},
-	)
-
-
-@login_required
-def privacidade(request):
-
-	# Consulta dos dados do titular autenticado (item 4.8)
-	logger.info("Titular consultou os dados pessoais.")
-	ultimo = request.user.consents.first()
-	return render(
-		request,
-		'accounts/privacidade.html',
-		{'ultimo_consentimento': ultimo},
-	)
-
-
-@login_required
-def exportar_dados(request):
-
-	# Exportação em JSON sem senha, salt ou segredo TOTP (item 4.9)
-	ultimo = request.user.consents.first()
-	payload = {
-		'username': request.user.username,
-		'email': request.user.email,
-		'date_joined': request.user.date_joined.isoformat(),
-		'consentimento': None if ultimo is None else {
-			'finalidade': ultimo.purpose,
-			'concedido': ultimo.granted,
-			'data': ultimo.granted_at.isoformat(),
-			'revogado_em': None if ultimo.revoked_at is None else ultimo.revoked_at.isoformat(),
-			'versao_politica': ultimo.policy_version,
-		},
-	}
-	logger.info("Titular exportou os dados pessoais.")
-	response = JsonResponse(payload, json_dumps_params={'ensure_ascii': False, 'indent': 2})
-	response['Content-Disposition'] = 'attachment; filename="meus-dados-verbum.json"'
-	return response
-
-
-@login_required
-def revogar_consentimento(request):
-
-	# Revoga ou renova o consentimento (item 4.6)
-	if request.method != 'POST':
-		return redirect('privacidade')
-
-	ultimo = request.user.consents.first()
-	if ultimo is not None and ultimo.granted:
-		ultimo.granted = False
-		ultimo.revoked_at = timezone.now()
-		ultimo.save(update_fields=['granted', 'revoked_at'])
-		logger.info("Titular revogou o consentimento.")
-		messages.success(request, 'Consentimento revogado.')
-	else:
-		ConsentRecord.objects.create(
-			user=request.user,
-			purpose=ConsentRecord.PURPOSE_DEFAULT,
-			granted=True,
-			policy_version='1.0',
-			source='privacidade',
-		)
-		logger.info("Titular renovou o consentimento.")
-		messages.success(request, 'Consentimento renovado (política v1.0).')
-
-	return redirect('privacidade')
-
-
-@login_required
-def excluir_conta(request):
-
-	# Exclusão da conta com confirmação de e-mail e senha (item 4.10)
-	if request.method != 'POST':
-		return redirect('privacidade')
-
-	email = request.POST.get('email', '')
-	password = request.POST.get('password', '')
-
-	if email.lower() != request.user.email.lower():
-		messages.error(request, 'O e-mail informado não confere.')
-		return redirect('privacidade')
-
-	if authenticate(request, username=request.user.username, password=password) is None:
-		messages.error(request, 'Senha incorreta. A conta não foi excluída.')
-		return redirect('privacidade')
-
-	logger.info("Titular solicitou exclusão da conta.")
-	user = request.user
-	logout(request)
-	user.delete()
-	return render(request, 'accounts/conta_excluida.html')
+	if 
