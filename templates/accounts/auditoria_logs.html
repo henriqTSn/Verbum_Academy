@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auditoria e Logs - VERBUM ACADEMY</title>
+    <link rel="stylesheet" href="{% static 'css/verbum.css' %}">
+</head>
+<body class="register-page">
+    <div class="auth-container">
+        <a class="auth-brand" href="{% url 'painel' %}"> VERBUM ACADEMY </a>
+        <main class="register-card">
+            <header class="register-header">
+                <h1>Auditoria e Logs</h1>
+                <p>Consulta somente leitura — itens 5.3 e 5.4</p>
+            </header>
+
+            <p>O arquivo verbum.log é gravado só pela aplicação, em modo append. Esta tela não edita nem apaga linhas.</p>
+            <p>Senha, token, código 2FA e secret TOTP não entram no registro.</p>
+
+            {% if linhas %}
+                <pre style="white-space: pre-wrap; word-break: break-word; font-size: 0.85rem; background: #111; color: #d6f5d6; padding: 1rem; border-radius: 8px; max-height: 28rem; overflow: auto;">{{ linhas|join:"
+" }}</pre>
+            {% else %}
+                <p>Nenhum evento registrado ainda. Faça login, 2FA e logout pelo site e atualize esta página.</p>
+            {% endif %}
+
+            <p><a href="{% url 'painel' %}">Voltar ao painel</a></p>
+        </main>
+    </div>
+</body>
+</html>
