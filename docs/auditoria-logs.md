@@ -17,12 +17,12 @@ Atender ao requisito de registro e proteção de eventos críticos de segurança
 
 ## Onde o log é gravado
 
-O sistema já possui configuração de logging em `Verbum/settings.py`.
+A configuração está em `Verbum/settings.py`.
 
 - destino: arquivo `verbum.log` na raiz do projeto
 - origem: logger do app `accounts`
 - nível: INFO
-- o arquivo é escrito pela aplicação, em modo de acréscimo
+- o arquivo é escrito pela aplicação, em modo append (`mode='a'`)
 
 Eventos já registrados em etapas anteriores (sem senha, token ou secret TOTP):
 
@@ -31,65 +31,46 @@ Eventos já registrados em etapas anteriores (sem senha, token ou secret TOTP):
 - sucesso da recuperação de senha
 - consulta, exportação, revogação e exclusão de dados pessoais
 
-Eventos desta etapa (autenticação, bloqueio, logout e 2FA) seguem a especificação de `docs/auditoria-eventos.md` e serão gravados no mesmo arquivo `verbum.log`, sem criar tabela no banco.
+Eventos desta etapa (autenticação, bloqueio, logout e 2FA) são gravados no mesmo `verbum.log`, sem criar tabela no banco.
+
+## Implementação
+
+Função `audit_log()` em `accounts/views.py`.
+
+Chamada em:
+
+- `login_view()` — `LOGIN_SUCCESS`, `LOGIN_FAILURE`, `ACCOUNT_LOCKED`
+- `verify_2fa()` — `2FA_SUCCESS`, `2FA_FAILURE`
+- `logout_view()` — `LOGOUT` (antes de encerrar a sessão)
+
+A home encaminha o POST do login para `login_view()`.
+Consulta somente leitura: `GET /accounts/auditoria/` (sem POST, sem editar, sem apagar).
 
 ## Eventos desta etapa
 
 | Evento | Item | Situação |
 |---|---|---|
-| LOGIN_SUCCESS | 5.1 | Especificado |
-| LOGIN_FAILURE | 5.2 | Especificado |
-| ACCOUNT_LOCKED | 5.2 | Especificado |
-| LOGOUT | 5.1 | Especificado |
-| 2FA_SUCCESS | 5.2 | Especificado |
-| 2FA_FAILURE | 5.2 | Especificado |
+| LOGIN_SUCCESS | 5.1 | Implementado |
+| LOGIN_FAILURE | 5.2 | Implementado |
+| ACCOUNT_LOCKED | 5.2 | Implementado |
+| LOGOUT | 5.1 | Implementado |
+| 2FA_SUCCESS | 5.2 | Implementado |
+| 2FA_FAILURE | 5.2 | Implementado |
 
 Nenhum desses registros guarda senha, token de recuperação, código 2FA, secret TOTP ou hash da senha.
 
 ## Proteção contra alteração (5.3)
 
-Justificativa técnica da proteção atual:
-
 1. O log não é editável pela interface do aluno.
-2. A gravação ocorre só pela aplicação, via `logging` do Django.
+2. A gravação ocorre só pela aplicação, via `logging` do Django, em modo append.
 3. O arquivo `verbum.log` não é servido como página pública.
-4. Não há tela para alterar ou apagar linha de log.
-5. O conteúdo não inclui segredo que, se vazado, permita recriar a senha ou o 2FA.
+4. A tela `/accounts/auditoria/` apenas consulta as últimas linhas.
+5. Não há tela para alterar ou apagar linha de log.
+6. O conteúdo não inclui segredo que, se vazado, permita recriar a senha ou o 2FA.
 
 Assim, um usuário comum não consegue falsificar o histórico pela aplicação.
 
 ## Evidências pelo front-end
-
-Os testes desta etapa devem ser feitos pela interface, não só pelo terminal:
-
-1. senha incorreta
-2. conta bloqueada após 5 tentativas
-3. senha correta e 2FA incorreto
-4. senha correta e 2FA correto
-5. logout
-
-Os prints entram em `docs/evidencias/` depois que o registro desses eventos estiver ativo no `verbum.log`.
-
-## Exemplo de análise de logs (5.4)
-
-Formato esperado no `verbum.log`:
-
-```text
-INFO LOGIN_FAILURE email=aluno@email.com
-INFO LOGIN_FAILURE email=aluno@email.com
-INFO ACCOUNT_LOCKED email=aluno@email.com
-INFO 2FA_FAILURE email=aluno@email.com
-INFO 2FA_SUCCESS email=aluno@email.com
-INFO LOGOUT email=aluno@email.com
-
-## Implementação
-
-Função `audit_log()` em `accounts/views.py`.
-Chamada em `login_view()`, `verify_2fa()` e `logout_view()`.
-A home encaminha o POST do login para `login_view()`.
-Consulta: `GET /accounts/auditoria/` (sem POST, sem apagar, sem editar).
-
-## Evidências de front-end
 
 - `33-2fa-falha.png` — código 2FA inválido
 - `34-2fa-sucesso.png` — painel após 2FA válido
@@ -97,7 +78,7 @@ Consulta: `GET /accounts/auditoria/` (sem POST, sem apagar, sem editar).
 - `36-tela-auditoria.png` — consulta somente leitura do log
 - `32-conta-bloqueada.png` — bloqueio após 5 tentativas
 
-## Exemplo de análise (5.4)
+## Exemplo de análise de logs (5.4)
 
 Trecho esperado no `verbum.log` após os testes no front-end:
 
