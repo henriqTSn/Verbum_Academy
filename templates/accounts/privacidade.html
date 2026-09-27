@@ -1,79 +1,429 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Privacidade - VERBUM ACADEMY</title>
-    <link rel="stylesheet" href="{% static 'css/verbum.css' %}">
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/verbum.css' %}"
+    >
 </head>
-<body class="register-page">
-    <div class="auth-container">
-        <a class="auth-brand" href="{% url 'painel' %}"> VERBUM ACADEMY </a>
-        <main class="register-card">
-            <header class="register-header">
-                <h1>Meus dados</h1>
-                <p>Direitos do titular — LGPD</p>
-            </header>
 
-            {% if messages %}
-                {% for message in messages %}
-                    <div class="register-message {% if message.tags == 'error' %}register-error{% else %}register-success{% endif %}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endif %}
+<body class="register-page privacy-dashboard-page">
 
-            <p><strong>Usuário:</strong> {{ user.username }}</p>
-            <p><strong>E-mail:</strong> {{ user.email }}</p>
-            <p><strong>Conta criada em:</strong> {{ user.date_joined }}</p>
+    <div class="privacy-dashboard-container">
 
-            {% if ultimo_consentimento %}
-                <p><strong>Consentimento:</strong> {% if ultimo_consentimento.granted %}concedido{% else %}revogado{% endif %}</p>
-                <p><strong>Finalidade:</strong> {{ ultimo_consentimento.purpose }}</p>
-                <p><strong>Data:</strong> {{ ultimo_consentimento.granted_at }}</p>
-                <p><strong>Versão da política:</strong> {{ ultimo_consentimento.policy_version }}</p>
-                {% if ultimo_consentimento.revoked_at %}
-                    <p><strong>Revogado em:</strong> {{ ultimo_consentimento.revoked_at }}</p>
-                {% endif %}
-            {% else %}
-                <p>Nenhum registro de consentimento encontrado.</p>
-            {% endif %}
+        <!-- Marca -->
+
+        <a
+            class="auth-brand"
+            href="{% url 'painel' %}"
+        >
+            VERBUM ACADEMY
+        </a>
+
+
+        <!-- Cabeçalho -->
+
+        <header class="privacy-dashboard-header">
+
+            <p class="privacy-tag">
+                PRIVACIDADE E PROTEÇÃO DE DADOS
+            </p>
+
+            <h1>
+                Meus dados
+            </h1>
 
             <p>
-                <a href="{% url 'exportar_dados' %}">Exportar meus dados (JSON)</a>
+                Gerencie seus dados pessoais e suas
+                preferências de privacidade.
             </p>
 
-            <form method="post" action="{% url 'revogar_consentimento' %}">
+        </header>
+
+
+        <!-- Mensagens -->
+
+        {% if messages %}
+
+            <div class="privacy-messages">
+
+                {% for message in messages %}
+
+                    <div
+                        class="register-message
+                        {% if message.tags == 'error' %}
+                            register-error
+                        {% else %}
+                            register-success
+                        {% endif %}"
+                    >
+                        {{ message }}
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+        {% endif %}
+
+
+        <!-- DADOS DA CONTA -->
+
+        <section class="privacy-panel">
+
+            <div class="privacy-panel-header">
+
+                <div>
+
+                    <p class="privacy-panel-tag">
+                        CONTA
+                    </p>
+
+                    <h2>
+                        Seus dados
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="privacy-data-grid">
+
+                <div class="privacy-data-item">
+
+                    <span>
+                        Usuário
+                    </span>
+
+                    <strong>
+                        {{ user.username }}
+                    </strong>
+
+                </div>
+
+
+                <div class="privacy-data-item">
+
+                    <span>
+                        E-mail
+                    </span>
+
+                    <strong>
+                        {{ user.email }}
+                    </strong>
+
+                </div>
+
+
+                <div class="privacy-data-item">
+
+                    <span>
+                        Conta criada em
+                    </span>
+
+                    <strong>
+                        {{ user.date_joined }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONSENTIMENTO -->
+
+        <section class="privacy-panel">
+
+            <div class="privacy-panel-header">
+
+                <div>
+
+                    <p class="privacy-panel-tag">
+                        CONSENTIMENTO
+                    </p>
+
+                    <h2>
+                        Uso dos seus dados
+                    </h2>
+
+                </div>
+
+
+                {% if ultimo_consentimento and ultimo_consentimento.granted %}
+
+                    <span class="privacy-status privacy-status-active">
+                        Concedido
+                    </span>
+
+                {% else %}
+
+                    <span class="privacy-status privacy-status-inactive">
+                        Revogado
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+
+            {% if ultimo_consentimento %}
+
+                <div class="privacy-consent-grid">
+
+                    <div>
+
+                        <span>
+                            Finalidade
+                        </span>
+
+                        <strong>
+                            {{ ultimo_consentimento.purpose }}
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Data
+                        </span>
+
+                        <strong>
+                            {{ ultimo_consentimento.granted_at }}
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Política
+                        </span>
+
+                        <strong>
+                            v{{ ultimo_consentimento.policy_version }}
+                        </strong>
+
+                    </div>
+
+
+                    {% if ultimo_consentimento.revoked_at %}
+
+                        <div>
+
+                            <span>
+                                Revogado em
+                            </span>
+
+                            <strong>
+                                {{ ultimo_consentimento.revoked_at }}
+                            </strong>
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            {% else %}
+
+                <p class="privacy-empty">
+                    Nenhum registro de consentimento encontrado.
+                </p>
+
+            {% endif %}
+
+
+            <form
+                method="post"
+                action="{% url 'revogar_consentimento' %}"
+            >
+
                 {% csrf_token %}
-                <button type="submit" class="register-button">
-                    {% if ultimo_consentimento and ultimo_consentimento.granted %}Revogar consentimento{% else %}Renovar consentimento{% endif %}
+
+                <button
+                    type="submit"
+                    class="privacy-button privacy-button-secondary"
+                >
+
+                    {% if ultimo_consentimento and ultimo_consentimento.granted %}
+
+                        Revogar consentimento
+
+                    {% else %}
+
+                        Renovar consentimento
+
+                    {% endif %}
+
                 </button>
+
             </form>
 
-            <hr>
+        </section>
 
-            <h2>Excluir conta</h2>
-            <p>Confirme com o e-mail e a senha atuais.</p>
-            <form method="post" action="{% url 'excluir_conta' %}">
-                {% csrf_token %}
-                <div class="register-field">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="register-field">
-                    <label for="password">Senha</label>
-                    <input type="password" id="password" name="password" required>
-                </div>
-                <button type="submit" class="register-button">Excluir minha conta</button>
-            </form>
 
-            <p class="auth-switch">
-                <a href="{% url 'painel' %}">Voltar ao painel</a>
-                ·
-                <a href="{% url 'politica_privacidade' %}">Política v1.0</a>
+        <!-- DIREITOS DO TITULAR -->
+
+        <section class="privacy-panel">
+
+            <div class="privacy-panel-header">
+
+                <div>
+
+                    <p class="privacy-panel-tag">
+                        SEUS DIREITOS
+                    </p>
+
+                    <h2>
+                        Acesso aos seus dados
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <p class="privacy-description">
+                Você pode solicitar uma cópia dos dados pessoais
+                armazenados pelo VERBUM. O arquivo é disponibilizado
+                em formato JSON e não inclui sua senha ou segredo
+                de autenticação em dois fatores.
             </p>
-        </main>
+
+
+            <a
+                href="{% url 'exportar_dados' %}"
+                class="privacy-button privacy-button-primary"
+            >
+                Exportar meus dados (JSON)
+            </a>
+
+        </section>
+
+
+        <!-- EXCLUSÃO DA CONTA -->
+
+        <section class="privacy-panel privacy-danger-panel">
+
+            <div class="privacy-panel-header">
+
+                <div>
+
+                    <p class="privacy-panel-tag privacy-danger-tag">
+                        EXCLUSÃO DA CONTA
+                    </p>
+
+                    <h2>
+                        Excluir conta
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <p class="privacy-description">
+                A exclusão da conta é permanente. Para confirmar
+                a operação, informe o e-mail e a senha atuais.
+            </p>
+
+
+            <form
+                method="post"
+                action="{% url 'excluir_conta' %}"
+                class="privacy-delete-form"
+            >
+
+                {% csrf_token %}
+
+
+                <div class="privacy-field">
+
+                    <label for="email">
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Digite seu e-mail"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="privacy-field">
+
+                    <label for="password">
+                        Senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Digite sua senha"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="privacy-button privacy-button-danger"
+                >
+                    Excluir minha conta
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- NAVEGAÇÃO -->
+
+        <nav
+            class="privacy-navigation"
+            aria-label="Navegação da página de privacidade"
+        >
+
+            <a href="{% url 'painel' %}">
+                ← Voltar ao painel
+            </a>
+
+            <span aria-hidden="true">
+                •
+            </span>
+
+            <a href="{% url 'politica_privacidade' %}">
+                Política de Privacidade
+            </a>
+
+        </nav>
+
     </div>
+
 </body>
+
 </html>
