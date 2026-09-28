@@ -96,18 +96,27 @@
                     </div>
 
                     <div class="profile-information-row">
-                        <span>Segurança 2FA</span>
+                    <span>Segurança 2FA</span>
 
-                        {% if two_factor_enabled %}
-                            <strong class="profile-status active">
-                                Ativado
-                            </strong>
-                        {% else %}
+                    {% if two_factor_enabled %}
+                        <strong class="profile-status active">
+                            Ativado
+                        </strong>
+                    {% else %}
+                        <div>
                             <strong class="profile-status inactive">
                                 Não ativado
                             </strong>
-                        {% endif %}
-                    </div>
+
+                            <a
+                                href="{% url 'setup_2fa' %}"
+                                class="profile-2fa-link"
+                            >
+                                Ativar 2FA
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
 
                 </div>
 

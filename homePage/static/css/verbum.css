@@ -2435,3 +2435,18 @@ body.privacy-page {
 .logout-confirm:hover {
     background: #b91c1c;
 }
+
+/* ativar 2fa */
+.profile-2fa-link {
+    display: inline-block;
+    margin-top: 8px;
+    color: #7dd3fc;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.profile-2fa-link:hover {
+    color: #bae6fd;
+    text-decoration: underline;
+}

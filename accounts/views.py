@@ -331,6 +331,18 @@ def verify_2fa(request):
 
 
 # Somente um usuário autenticado pode acessar essa página painel.
+@login_required(login_url="homePage")
+def perfil(request):
+    profile, _ = UserProfile.objects.get_or_create(user=request.user)
+
+    return render(
+        request,
+        "accounts/user.html",
+        {
+            "two_factor_enabled": profile.two_factor_enabled,
+        },
+    )
+
 @login_required
 def painel(request):
 	return render(request, 'painel.html')
