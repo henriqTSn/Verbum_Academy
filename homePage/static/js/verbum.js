@@ -1,4 +1,4 @@
-// MOSTRAR OU OCULTAR A SENHA
+// ocultar senha 
 
 const password = document.querySelector("#password");
 const togglePassword = document.querySelector("#toggle-password");
@@ -34,7 +34,7 @@ if (password && togglePassword) {
   });
 }
 
-// CONFIRMAÇÃO DA SENHA NO CADASTRO
+// confirmar senha no cadastro
 
 const passwordConfirmation = document.querySelector(
   "#password_confirmation"
@@ -68,7 +68,7 @@ if (password && passwordConfirmation) {
   );
 }
 
-// EVITAR VÁRIOS ENVIOS DO MESMO FORMULÁRIO
+// evita envios repetidos
 
 const forms = document.querySelectorAll("form");
 
@@ -104,7 +104,7 @@ forms.forEach((form) => {
 });
 
 
-// BOTÃO PARA INICIAR UMA ATIVIDADE
+// botao para iniciar uma atividade
 
 const startLesson = document.querySelector("#start-lesson");
 
@@ -116,4 +116,27 @@ if (startLesson) {
     startLesson.classList.add("selected");
     startLesson.setAttribute("aria-pressed", "true");
   });
+}
+
+const logoutButton = document.getElementById("logoutButton");
+const logoutModal = document.getElementById("logoutModal");
+const cancelLogout = document.getElementById("cancelLogout");
+
+if (logoutButton && logoutModal && cancelLogout) {
+
+    logoutButton.addEventListener("click", function(event) {
+        event.preventDefault();
+        logoutModal.classList.add("active");
+    });
+
+    cancelLogout.addEventListener("click", function() {
+        logoutModal.classList.remove("active");
+    });
+
+    logoutModal.addEventListener("click", function(event) {
+        if (event.target === logoutModal) {
+            logoutModal.classList.remove("active");
+        }
+    });
+
 }

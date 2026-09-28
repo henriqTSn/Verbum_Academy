@@ -1,16 +1,24 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Painel | VERBUM ACADEMY</title>
   <link rel="stylesheet" href="{% static 'css/verbum.css' %}">
 </head>
+
 <body>
+
   <div class="app-layout">
+
     <aside class="sidebar">
-      <a class="logo" href="{% url 'painel' %}"><span>V</span> VERBUM ACADEMY</a>
+
+      <a class="logo" href="{% url 'painel' %}">
+        <span>V</span> VERBUM ACADEMY
+      </a>
+
       <nav>
         <a class="active" href="{% url 'painel' %}">⌂ Início</a>
         <a href="#vocabulario">Vocabulário</a>
@@ -19,45 +27,206 @@
         <a href="{% url 'perfil' %}">◎ Perfil</a>
         <a href="{% url 'privacidade' %}">Privacidade</a>
         <a href="{% url 'auditoria_logs' %}">Auditoria</a>
-	<a href="{% url 'logout' %}">Sair</a>
+
+        <a href="#" id="logoutButton">Sair</a>
       </nav>
-      <div class="language"><small>Idioma atual</small><strong>🇬🇧 Inglês</strong></div>
-    </aside>
-    <main class="content">
-      <header class="topbar">
-        <div><p class="tag">SEU PAINEL</p><h1>Olá, {{ user.first_name|default:user.username }}!</h1><p class="subtext">Vamos praticar um pouco hoje?</p></div>
-        <div class="avatar">{{ user.first_name|first|default:'U' }}</div>
-      </header>
-      <div class="dashboard">
-        <section>
-          <article class="next-lesson">
-            <p class="tag tag-light">PRÓXIMA ATIVIDADE · 8 MIN</p>
-            <h2>Expressões para manter uma conversa</h2>
-            <p>Aprenda chunks como “That makes sense” e “How about you?”.</p>
-            <button id="start-lesson" type="button">Começar atividade →</button>
-          </article>
-          <div class="stats">
-            <article class="card"><strong>7</strong><span>dias de sequência 🔥</span></article>
-            <article class="card"><strong>42</strong><span>palavras aprendidas</span></article>
-            <article class="card"><strong>3h</strong><span>estudadas neste mês</span></article>
-          </div>
-          <h2 class="section-title" id="vocabulario">Continuar estudando</h2>
-          <article class="card study"><b>Aa</b><div><strong>Vocabulário essencial</strong><span>18 de 30 palavras</span><div class="progress"><i style="width:60%"></i></div></div></article>
-          <article class="card study" id="chunks"><b>“ ”</b><div><strong>Chunks do dia a dia</strong><span>9 de 20 expressões</span><div class="progress"><i style="width:45%"></i></div></div></article>
-        </section>
-        <aside>
-          <article class="card weekly-goal">
-            <p class="tag">META SEMANAL</p>
-            <div class="goal-circle">72%</div>
-            <strong>5 de 7 dias</strong>
-            <p class="subtext">Faltam só 2 dias para completar sua meta.</p>
-          </article>
-          <h2 class="section-title" id="historico">Último estudo</h2>
-          <article class="card study"><b>✓</b><div><strong>Conectores básicos</strong><span>Hoje · 12 minutos</span></div></article>
-        </aside>
+
+      <div class="language">
+        <small>Idioma atual</small>
+        <strong>🇬🇧 Inglês</strong>
       </div>
+
+    </aside>
+
+    <main class="content">
+
+      <header class="topbar">
+
+        <div>
+          <p class="tag">SEU PAINEL</p>
+
+          <h1>
+            Olá, {{ user.first_name|default:user.username }}!
+          </h1>
+
+          <p class="subtext">
+            Vamos praticar um pouco hoje?
+          </p>
+        </div>
+
+        <div class="avatar">
+          {{ user.first_name|first|default:'U' }}
+        </div>
+
+      </header>
+
+
+      <div class="dashboard">
+
+        <section>
+
+          <article class="next-lesson">
+
+            <p class="tag tag-light">
+              PRÓXIMA ATIVIDADE · 8 MIN
+            </p>
+
+            <h2>
+              Expressões para manter uma conversa
+            </h2>
+
+            <p>
+              Aprenda chunks como “That makes sense” e “How about you?”.
+            </p>
+
+            <button id="start-lesson" type="button">
+              Começar atividade →
+            </button>
+
+          </article>
+
+          <div class="stats">
+
+            <article class="card">
+              <strong>7</strong>
+              <span>dias de sequência 🔥</span>
+            </article>
+
+            <article class="card">
+              <strong>42</strong>
+              <span>palavras aprendidas</span>
+            </article>
+
+            <article class="card">
+              <strong>3h</strong>
+              <span>estudadas neste mês</span>
+            </article>
+
+          </div>
+
+          <h2 class="section-title" id="vocabulario">
+            Continuar estudando
+          </h2>
+
+          <article class="card study">
+
+            <b>Aa</b>
+
+            <div>
+              <strong>Vocabulário essencial</strong>
+
+              <span>18 de 30 palavras</span>
+
+              <div class="progress">
+                <i style="width:60%"></i>
+              </div>
+            </div>
+
+          </article>
+
+
+          <article class="card study" id="chunks">
+
+            <b>“ ”</b>
+
+            <div>
+              <strong>Chunks do dia a dia</strong>
+
+              <span>9 de 20 expressões</span>
+
+              <div class="progress">
+                <i style="width:45%"></i>
+              </div>
+            </div>
+
+          </article>
+
+        </section>
+
+        <aside>
+
+          <article class="card weekly-goal">
+
+            <p class="tag">
+              META SEMANAL
+            </p>
+
+            <div class="goal-circle">
+              72%
+            </div>
+
+            <strong>
+              5 de 7 dias
+            </strong>
+
+            <p class="subtext">
+              Faltam só 2 dias para completar sua meta.
+            </p>
+
+          </article>
+
+
+          <h2 class="section-title" id="historico">
+            Último estudo
+          </h2>
+
+
+          <article class="card study">
+
+            <b>✓</b>
+
+            <div>
+              <strong>Conectores básicos</strong>
+              <span>Hoje · 12 minutos</span>
+            </div>
+
+          </article>
+
+        </aside>
+
+      </div>
+
     </main>
+
   </div>
+
+  <!-- popup de sair -->
+
+  <div class="logout-modal" id="logoutModal">
+
+    <div class="logout-modal-content">
+
+      <h2>Deseja realmente sair?</h2>
+
+      <p>
+        Você será desconectado da sua conta.
+      </p>
+
+      <div class="logout-modal-actions">
+
+        <button
+          type="button"
+          class="logout-cancel"
+          id="cancelLogout"
+        >
+          Cancelar
+        </button>
+
+        <a
+          href="{% url 'logout' %}"
+          class="logout-confirm"
+        >
+          Sair
+        </a>
+
+      </div>
+
+    </div>
+
+  </div>
+
   <script src="{% static 'js/verbum.js' %}"></script>
+
+
 </body>
 </html>
