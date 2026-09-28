@@ -1,33 +1,174 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auditoria e Logs - VERBUM ACADEMY</title>
-    <link rel="stylesheet" href="{% static 'css/verbum.css' %}">
+
+    <title>Auditoria e Logs | VERBUM ACADEMY</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/verbum.css' %}"
+    >
 </head>
-<body class="register-page">
-    <div class="auth-container">
-        <a class="auth-brand" href="{% url 'painel' %}">VERBUM ACADEMY</a>
-        <main class="register-card">
-            <header class="register-header">
-                <h1>Auditoria e Logs</h1>
-                <p>Consulta somente leitura — itens 5.3 e 5.4</p>
+
+<body class="audit-page">
+
+    <main class="audit-container">
+
+        <header class="audit-header">
+
+            <a
+                class="auth-brand audit-brand"
+                href="{% url 'painel' %}"
+            >
+                VERBUM ACADEMY
+            </a>
+
+            <a
+                class="audit-back"
+                href="{% url 'painel' %}"
+            >
+                ← Voltar ao painel
+            </a>
+
+        </header>
+
+        <section class="audit-title">
+
+            <div>
+
+                <p class="audit-tag">
+                    SEGURANÇA E AUDITORIA
+                </p>
+
+                <h1>
+                    Auditoria e Logs
+                </h1>
+
+                <p>
+                    Consulte os eventos registrados pelo sistema.
+                </p>
+
+            </div>
+
+            <span class="audit-status">
+                SOMENTE LEITURA
+            </span>
+
+        </section>
+
+        <section class="audit-info-grid">
+
+            <article class="audit-info-card">
+
+                <span class="audit-info-icon">
+                    ◉
+                </span>
+
+                <div>
+                    <strong>
+                        Registro de eventos
+                    </strong>
+
+                    <p>
+                        Os eventos são registrados automaticamente pela aplicação.
+                    </p>
+                </div>
+
+            </article>
+
+
+            <article class="audit-info-card">
+
+                <span class="audit-info-icon">
+                    ✓
+                </span>
+
+                <div>
+                    <strong>
+                        Dados protegidos
+                    </strong>
+
+                    <p>
+                        Senhas, tokens, códigos 2FA e secrets TOTP não são registrados.
+                    </p>
+                </div>
+
+            </article>
+
+        </section>
+
+        <section class="audit-log-card">
+
+            <header class="audit-log-header">
+
+                <div>
+
+                    <p class="audit-tag">
+                        REGISTRO DO SISTEMA
+                    </p>
+
+                    <h2>
+                        Eventos recentes
+                    </h2>
+
+                </div>
+
+                {% if linhas %}
+                    <span class="audit-log-count">
+                        {{ linhas|length }} registros
+                    </span>
+                {% endif %}
+
             </header>
 
-            <p>O arquivo verbum.log é gravado só pela aplicação, em modo append. Esta tela não edita nem apaga linhas.</p>
-            <p>Senha, token, código 2FA e secret TOTP não entram no registro.</p>
 
             {% if linhas %}
-                <pre style="white-space: pre-wrap; word-break: break-word; font-size: 0.85rem; background: #111; color: #d6f5d6; padding: 1rem; border-radius: 8px; max-height: 28rem; overflow: auto;">{% for linha in linhas %}{{ linha }}
-{% endfor %}</pre>
+
+                <div class="audit-log-wrapper">
+
+                    <pre class="audit-log">{% for linha in linhas %}{{ linha }}
+            {% endfor %}</pre>
+
+                </div>
+
             {% else %}
-                <p>Nenhum evento registrado ainda. Faça login, 2FA e logout pelo site e atualize esta página.</p>
+
+                <div class="audit-empty">
+
+                    <span>
+                        Nenhum evento registrado ainda.
+                    </span>
+
+                    <p>
+                        Faça login, utilize o 2FA ou encerre sua sessão
+                        para gerar novos eventos de auditoria.
+                    </p>
+
+                </div>
+
             {% endif %}
 
-            <p><a href="{% url 'painel' %}">Voltar ao painel</a></p>
-        </main>
-    </div>
+        </section>
+
+        <footer class="audit-footer">
+
+            <p>
+                Os registros são exibidos apenas para consulta.
+            </p>
+
+            <a href="{% url 'painel' %}">
+                Voltar ao painel
+            </a>
+
+        </footer>
+
+    </main>
+
+
 </body>
 </html>
