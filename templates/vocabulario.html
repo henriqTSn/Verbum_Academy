@@ -107,21 +107,56 @@
 
             <div class="vocab-grid">
                 {% for palavra in palavras %}
-                    <article class="word-card">
-                        <span class="word-number">
-                            PALAVRA {{ forloop.counter|stringformat:"02d" }}
-                        </span>
+                    <article
+                        class="word-card flashcard"
+                        tabindex="0"
+                        role="button"
+                        aria-pressed="false"
+                        aria-label="Revelar tradução de {{ palavra.word }}"
+                    >
+                        <div class="flashcard-inner">
 
-                        <h3 class="word-title">{{ palavra.word }}</h3>
+                            <!-- Frente do cartão: inglês -->
+                            <div class="flashcard-face flashcard-front">
+                                <span class="word-number">
+                                    PALAVRA {{ forloop.counter|stringformat:"02d" }}
+                                </span>
 
-                        <p class="translation">
-                            {{ palavra.translation }}
-                        </p>
+                                <h3 class="word-title">
+                                    {{ palavra.word }}
+                                </h3>
 
-                        <span class="category-tag">
-                            {{ palavra.category }}
-                        </span>
+                                <span class="category-tag">
+                                    {{ palavra.category }}
+                                </span>
+
+                                <span class="flashcard-hint">
+                                    Clique para ver a tradução ↻
+                                </span>
+                            </div>
+
+                            <!-- Verso do cartão: tradução -->
+                            <div class="flashcard-face flashcard-back">
+                                <span class="flashcard-label">
+                                    TRADUÇÃO
+                                </span>
+
+                                <p class="translation">
+                                    {{ palavra.translation }}
+                                </p>
+
+                                <span class="category-tag">
+                                    {{ palavra.category }}
+                                </span>
+
+                                <span class="flashcard-hint">
+                                    Clique para voltar ↻
+                                </span>
+                            </div>
+
+                        </div>
                     </article>
+
                 {% empty %}
                     <div class="empty-state">
                         <h3 class="empty-title">
@@ -146,6 +181,9 @@
         </footer>
 
     </main>
+
+    <!-- Carrega o JavaScript do projeto -->
+    <script src="{% static 'js/verbum.js' %}"></script>
 
 </body>
 </html>

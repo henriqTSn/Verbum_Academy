@@ -3393,3 +3393,142 @@ body.privacy-page {
         line-height: 1.7;
     }
 }
+
+/* Flashcards de vocabulario */
+
+.vocab-page .flashcard {
+    position: relative;
+    min-height: 250px;
+    padding: 0;
+    border: none;
+    border-radius: 16px;
+    background: transparent;
+    perspective: 1000px;
+    cursor: pointer;
+    outline: none;
+}
+
+.vocab-page .flashcard:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+.vocab-page .flashcard:focus-visible {
+    outline: 2px solid #7dd3fc;
+    outline-offset: 4px;
+}
+
+.vocab-page .flashcard-inner {
+    position: relative;
+    width: 100%;
+    min-height: 250px;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.vocab-page .flashcard.is-flipped .flashcard-inner {
+    transform: rotateY(180deg);
+}
+
+.vocab-page .flashcard-face {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 26px;
+    overflow: hidden;
+    border: 1px solid rgba(125, 211, 252, 0.2);
+    border-radius: 16px;
+    background: #1e293b;
+    color: #f8fafc;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+.vocab-page .flashcard-front {
+    transform: rotateY(0deg);
+}
+
+.vocab-page .flashcard-back {
+    align-items: center;
+    text-align: center;
+    transform: rotateY(180deg);
+    border-color: rgba(125, 211, 252, 0.45);
+    background: #17263b;
+}
+
+.vocab-page .flashcard .word-number {
+    margin-bottom: 18px;
+    color: #7dd3fc;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+}
+
+.vocab-page .flashcard .word-title {
+    margin: 0 0 20px;
+    color: #f8fafc;
+    font-size: 28px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.vocab-page .flashcard .translation {
+    margin: 0 0 20px;
+    color: #f8fafc;
+    font-size: 23px;
+    font-weight: 650;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+.vocab-page .flashcard-label {
+    margin-bottom: 12px;
+    color: #7dd3fc;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+}
+
+.vocab-page .flashcard .category-tag {
+    margin-top: 0;
+}
+
+.vocab-page .flashcard-hint {
+    margin-top: auto;
+    padding-top: 22px;
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+.vocab-page .flashcard-back .flashcard-hint {
+    color: #7dd3fc;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .vocab-page .flashcard-inner {
+        transition: none;
+    }
+}
+
+@media (max-width: 560px) {
+    .vocab-page .flashcard,
+    .vocab-page .flashcard-inner {
+        min-height: 220px;
+    }
+
+    .vocab-page .flashcard-face {
+        padding: 22px;
+    }
+
+    .vocab-page .flashcard .word-title {
+        font-size: 25px;
+    }
+
+    .vocab-page .flashcard .translation {
+        font-size: 21px;
+    }
+}
