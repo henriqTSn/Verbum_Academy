@@ -1,0 +1,151 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Vocabulário | Verbum Academy</title>
+
+    <link rel="stylesheet" href="{% static 'css/verbum.css' %}">
+</head>
+
+<body class="vocab-page">
+
+    <header class="topbar">
+        <a class="brand" href="/accounts/painel/" aria-label="Verbum Academy - Painel">
+            <span class="brand-mark">V</span>
+            <span>Verbum <span class="brand-accent">Academy</span></span>
+        </a>
+
+        <a class="back-link" href="/accounts/painel/">
+            <span aria-hidden="true">←</span>
+            Voltar ao painel
+        </a>
+    </header>
+
+    <main class="vocab-container">
+
+        <nav class="breadcrumb" aria-label="Navegação">
+            <a href="/accounts/painel/">Painel</a>
+            <span>/</span>
+            <span class="breadcrumb-current">Vocabulário</span>
+        </nav>
+
+        <section class="heading">
+            <div>
+                <p class="eyebrow">Seu espaço de aprendizado</p>
+                <h1 class="page-title">Vocabulário em inglês</h1>
+                <p class="subtitle">
+                    Amplie seu vocabulário, uma palavra de cada vez.
+                </p>
+            </div>
+
+            <div class="word-count">
+                <strong>{{ palavras|length }}</strong>
+                resultado(s)
+            </div>
+        </section>
+
+        <section class="search-panel">
+            <label class="search-label" for="word-search">
+                Encontre uma palavra
+            </label>
+
+            <form method="get" class="search-form">
+                <input
+                    class="search-input"
+                    id="word-search"
+                    type="search"
+                    name="q"
+                    placeholder="Pesquise em inglês ou português..."
+                    value="{{ pesquisa }}"
+                    autocomplete="off"
+                >
+
+                <select
+                    class="category-select"
+                    name="categoria"
+                    aria-label="Filtrar por categoria"
+                >
+                    <option value="">Todas as categorias</option>
+
+                    {% for categoria in categorias %}
+                        <option
+                            value="{{ categoria }}"
+                            {% if categoria_selecionada == categoria %}selected{% endif %}
+                        >
+                            {{ categoria }}
+                        </option>
+                    {% endfor %}
+                </select>
+
+                <button class="search-button" type="submit">
+                    Pesquisar
+                </button>
+
+                <a class="clear-link" href="/vocabulario/">
+                    Limpar
+                </a>
+            </form>
+        </section>
+
+        <section class="vocab-section">
+            <div class="section-heading">
+                <div>
+                    <h2 class="section-title">Palavras disponíveis</h2>
+                    <p class="section-description">
+                        Palavras, traduções e categorias para estudar.
+                    </p>
+                </div>
+
+                <span class="results-label">
+                    {{ palavras|length }} resultado(s)
+                </span>
+            </div>
+
+            <div class="vocab-grid">
+                {% for palavra in palavras %}
+                    <article class="word-card">
+                        <span class="word-number">
+                            PALAVRA {{ forloop.counter|stringformat:"02d" }}
+                        </span>
+
+                        <h3 class="word-title">{{ palavra.word }}</h3>
+
+                        <p class="translation">
+                            {{ palavra.translation }}
+                        </p>
+
+                        <span class="category-tag">
+                            {{ palavra.category }}
+                        </span>
+                    </article>
+                {% empty %}
+                    <div class="empty-state">
+                        <h3 class="empty-title">
+                            Nenhuma palavra encontrada
+                        </h3>
+
+                        <p>
+                            Tente pesquisar outro termo ou selecionar
+                            uma categoria diferente.
+                        </p>
+
+                        <a href="/vocabulario/">
+                            Ver todas as palavras
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <footer class="vocab-footer">
+            Verbum Academy · Seu aprendizado de inglês em um só lugar.
+        </footer>
+
+    </main>
+
+</body>
+</html>
