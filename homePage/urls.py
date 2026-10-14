@@ -15,4 +15,9 @@ urlpatterns = [
         views.register_page,
         name="register"
     ),
+
+	path(
+		"vocabulario/",
+		views.vocabulario,
+		name="vocabulario"),
 ]
