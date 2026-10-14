@@ -140,3 +140,28 @@ if (logoutButton && logoutModal && cancelLogout) {
     });
 
 }
+
+/* Efeito de virar os cartões do vocabulario */
+
+document.querySelectorAll(".vocab-page .flashcard").forEach((card) => {
+    function toggleFlashcard() {
+        const flipped = card.classList.toggle("is-flipped");
+
+        card.setAttribute("aria-pressed", String(flipped));
+        card.setAttribute(
+            "aria-label",
+            flipped
+                ? "Tradução revelada. Clique para voltar à palavra em inglês."
+                : `Revelar tradução de ${card.querySelector(".word-title").textContent.trim()}`
+        );
+    }
+
+    card.addEventListener("click", toggleFlashcard);
+
+    card.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            toggleFlashcard();
+        }
+    });
+});
