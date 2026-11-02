@@ -1,0 +1,83 @@
+name: DevSecOps Avançado
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  dast-zap:
+    name: DAST com OWASP ZAP
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build e sobe a aplicação com Docker
+        run: |
+          docker build -t verbum-academy:ci .
+          docker run -d --name verbum-app -p 8000:8000 verbum-academy:ci
+          echo "Aguardando a aplicação ficar disponível..."
+          for i in $(seq 1 40); do
+            if curl -sf http://localhost:8000/ > /dev/null; then
+              echo "Aplicação no ar!"
+              break
+            fi
+            sleep 3
+          done
+          curl -I http://localhost:8000/ || true
+
+      - name: OWASP ZAP Full Scan (DAST)
+        uses: zaproxy/action-full-scan@v0.12.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          docker_name: 'ghcr.io/zaproxy/zaproxy:stable'
+          target: 'http://localhost:8000/'
+          fail_action: true
+          allow_issue_writing: false
+          artifact_name: zap-dast-report
+          cmd_options: '-m 3 -T 8 -I'
+
+      - name: Para a aplicação
+        if: always()
+        run: docker stop verbum-app || true
+
+  bearer-privacy:
+    name: Scanner de Privacidade com Bearer
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Bearer - Varredura de Privacidade e Dados Sensíveis (LGPD)
+        uses: bearer/bearer-action@v2
+        with:
+          severity: 'high,critical'
+          # O Bearer detecta vazamento de PII, falta de sanitização e regras de privacidade por padrão
+
+  trivy-sbom:
+    name: SBOM com Trivy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Instala Trivy
+        run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin v0.58.1
+
+      - name: Gera SBOM no formato CycloneDX
+        run: |
+          trivy fs --format cyclonedx --output sbom.json --quiet .
+
+      - name: Upload do artefato SBOM
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom-cyclonedx
+          path: sbom.json
+          retention-days: 30
