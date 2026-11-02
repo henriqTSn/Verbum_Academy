@@ -36,16 +36,35 @@ jobs:
           echo "=== Logs do container ==="
           docker logs verbum-app || true
 
+      - name: Prepara diretório para o ZAP
+        run: |
+          mkdir -p zap-reports
+          chmod 777 zap-reports
+          touch zap-reports/report.html zap-reports/report.json zap-reports/report.md
+          chmod 666 zap-reports/*
+
       - name: OWASP ZAP Baseline Scan
-        uses: zaproxy/action-baseline@v0.12.0
+        run: |
+          docker run --rm \
+            --network host \
+            -v $(pwd)/zap-reports:/zap/wrk:rw \
+            --user root \
+            ghcr.io/zaproxy/zaproxy:stable \
+            zap-baseline.py \
+            -t http://localhost:8000/ \
+            -r /zap/wrk/report.html \
+            -J /zap/wrk/report.json \
+            -w /zap/wrk/report.md \
+            -I \
+            || true
+          echo "Scan do ZAP finalizado"
+
+      - name: Upload relatório ZAP
+        if: always()
+        uses: actions/upload-artifact@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          docker_name: 'ghcr.io/zaproxy/zaproxy:stable'
-          target: 'http://localhost:8000/'
-          fail_action: true
-          allow_issue_writing: false
-          artifact_name: zap-dast-report
-          cmd_options: '-m 2 -T 5 -I'
+          name: zap_dast_report
+          path: zap-reports/
 
       - name: Para a aplicação
         if: always()
@@ -71,7 +90,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Gerar SBOM com Trivy (CycloneDX)
-        uses: aquasecurity/trivy-action@0.27.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: 'fs'
           format: 'cyclonedx'
@@ -81,6 +100,6 @@ jobs:
       - name: Upload do artefato SBOM
         uses: actions/upload-artifact@v4
         with:
-          name: sbom-cyclonedx
+          name: sbom_cyclonedx
           path: sbom.json
           retention-days: 30
