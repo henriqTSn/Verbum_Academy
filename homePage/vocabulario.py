@@ -2015,3 +2015,2006 @@ PALAVRAS = [
         "category": 'Conectores',
     },
 ]
+
+CHUNKS = [
+    {
+        "word": 'Hello, how are you?',
+        "translation": 'Olá, como você está?',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": "How's it going?",
+        "translation": 'Como vão as coisas?',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": 'Nice to meet you',
+        "translation": 'Prazer em conhecer você',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": 'Good to see you',
+        "translation": 'Bom ver você',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": 'Long time no see',
+        "translation": 'Quanto tempo!',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": "What's your name?",
+        "translation": 'Qual é o seu nome?',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": 'My name is...',
+        "translation": 'Meu nome é...',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": 'Where are you from?',
+        "translation": 'De onde você é?',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": "I'm from Brazil",
+        "translation": 'Eu sou do Brasil',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": 'What do you do?',
+        "translation": 'O que você faz?',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": 'I work as...',
+        "translation": 'Eu trabalho como...',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": "I'm a student",
+        "translation": 'Sou estudante',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": 'How old are you?',
+        "translation": 'Quantos anos você tem?',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": 'This is my friend',
+        "translation": 'Este é meu amigo / minha amiga',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": 'Let me introduce myself',
+        "translation": 'Deixe-me me apresentar',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": 'Pleased to meet you',
+        "translation": 'Muito prazer',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": 'How have you been?',
+        "translation": 'Como você tem passado?',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": "I'm doing well",
+        "translation": 'Estou bem',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": 'Not bad, thanks',
+        "translation": 'Nada mal, obrigado(a)',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": 'See you later',
+        "translation": 'Até mais tarde',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": "How's everything?",
+        "translation": 'Como estão as coisas?',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": 'How was your day?',
+        "translation": 'Como foi seu dia?',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": "What's up?",
+        "translation": 'E aí? / O que há?',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": "It's nice to see you",
+        "translation": 'É bom ver você',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": 'Have a good day',
+        "translation": 'Tenha um bom dia',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": 'Have a great weekend',
+        "translation": 'Tenha um ótimo fim de semana',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": 'Take care',
+        "translation": 'Cuide-se',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": 'See you tomorrow',
+        "translation": 'Até amanhã',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": 'Talk to you soon',
+        "translation": 'Falo com você em breve',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": "I'm glad to meet you",
+        "translation": 'Estou feliz em conhecer você',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": 'Where do you live?',
+        "translation": 'Onde você mora?',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": 'I live nearby',
+        "translation": 'Moro aqui perto',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": 'What brings you here?',
+        "translation": 'O que traz você aqui?',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": 'Are you new here?',
+        "translation": 'Você é novo(a) aqui?',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": 'Let me introduce you',
+        "translation": 'Deixe-me apresentar você',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": 'This is...',
+        "translation": 'Este / esta é...',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": 'I come from...',
+        "translation": 'Eu venho de...',
+        "category": 'Cumprimentos e apresentações',
+    },
+    {
+        "word": 'What do you mean?',
+        "translation": 'O que você quer dizer?',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": 'I see what you mean',
+        "translation": 'Entendo o que você quer dizer',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": 'You know what?',
+        "translation": 'Sabe de uma coisa?',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": 'Guess what?',
+        "translation": 'Adivinha só?',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": 'That sounds good',
+        "translation": 'Isso parece bom',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": 'Sounds like a plan',
+        "translation": 'Parece um bom plano',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": 'I have no idea',
+        "translation": 'Não faço ideia',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": "I don't think so",
+        "translation": 'Acho que não',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": 'I think so',
+        "translation": 'Acho que sim',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": "It doesn't matter",
+        "translation": 'Não importa',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": 'It makes sense',
+        "translation": 'Faz sentido',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": "That's true",
+        "translation": 'Isso é verdade',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": "You're right",
+        "translation": 'Você está certo(a)',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": 'I agree with you',
+        "translation": 'Concordo com você',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": "I don't agree",
+        "translation": 'Não concordo',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": "That's a good point",
+        "translation": 'Esse é um bom argumento',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": 'To be honest',
+        "translation": 'Para ser sincero(a)',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": 'As far as I know',
+        "translation": 'Até onde eu sei',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": 'The thing is...',
+        "translation": 'A questão é...',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": 'By the way',
+        "translation": 'A propósito',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": 'What happened?',
+        "translation": 'O que aconteceu?',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": "What's going on?",
+        "translation": 'O que está acontecendo?',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": 'What are you talking about?',
+        "translation": 'Sobre o que você está falando?',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": 'I get it',
+        "translation": 'Entendi',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": 'That makes sense',
+        "translation": 'Isso faz sentido',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": 'I know what you mean',
+        "translation": 'Sei o que você quer dizer',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": 'You never know',
+        "translation": 'Nunca se sabe',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": 'It happens',
+        "translation": 'Acontece',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": "That's not fair",
+        "translation": 'Isso não é justo',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": 'Are you kidding me?',
+        "translation": 'Você está brincando?',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": "I can't believe it",
+        "translation": 'Não consigo acreditar',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": 'It sounds familiar',
+        "translation": 'Isso parece familiar',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": 'Let me see',
+        "translation": 'Deixe-me ver',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": 'Here you go',
+        "translation": 'Aqui está',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": 'There you are',
+        "translation": 'Aí está você',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": "It's up to you",
+        "translation": 'Você decide',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": 'Whatever you say',
+        "translation": 'Como você quiser',
+        "category": 'Conversas do dia a dia',
+    },
+    {
+        "word": 'Could you help me?',
+        "translation": 'Você poderia me ajudar?',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'Can you do me a favor?',
+        "translation": 'Pode me fazer um favor?',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'Could you repeat that?',
+        "translation": 'Poderia repetir isso?',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'Could you speak slowly?',
+        "translation": 'Poderia falar devagar?',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'Please, wait a moment',
+        "translation": 'Por favor, espere um momento',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'Just a moment',
+        "translation": 'Só um momento',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'Would you mind...?',
+        "translation": 'Você se importaria...?',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'Can I ask you something?',
+        "translation": 'Posso perguntar uma coisa?',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'May I come in?',
+        "translation": 'Posso entrar?',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'Can I have...?',
+        "translation": 'Posso pegar...?',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": "I'd like...",
+        "translation": 'Eu gostaria de...',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": "I'd like to know",
+        "translation": 'Eu gostaria de saber',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'Could I get the bill?',
+        "translation": 'Poderia trazer a conta?',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'Please let me know',
+        "translation": 'Por favor, me avise',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'Thank you so much',
+        "translation": 'Muito obrigado(a)',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": "You're welcome",
+        "translation": 'De nada',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'No problem at all',
+        "translation": 'Sem problema algum',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'I really appreciate it',
+        "translation": 'Eu agradeço muito',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'Excuse me',
+        "translation": 'Com licença',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": "I'm sorry about that",
+        "translation": 'Sinto muito por isso',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'Can you give me a hand?',
+        "translation": 'Pode me dar uma mão?',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'Could you show me?',
+        "translation": 'Poderia me mostrar?',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'Would you please...?',
+        "translation": 'Você poderia, por favor...?',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'Can I use your phone?',
+        "translation": 'Posso usar seu telefone?',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'Could you open the window?',
+        "translation": 'Poderia abrir a janela?',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'Please be careful',
+        "translation": 'Por favor, tenha cuidado',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'After you',
+        "translation": 'Depois de você',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'Go ahead',
+        "translation": 'Pode ir / fique à vontade',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'Feel free to ask',
+        "translation": 'Sinta-se à vontade para perguntar',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'Sorry to bother you',
+        "translation": 'Desculpe incomodar',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": "I didn't mean to...",
+        "translation": 'Eu não quis...',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'That would be great',
+        "translation": 'Isso seria ótimo',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": "That's very kind of you",
+        "translation": 'Isso é muito gentil da sua parte',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'Thanks for your help',
+        "translation": 'Obrigado(a) pela ajuda',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'I owe you one',
+        "translation": 'Fico te devendo uma',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'No worries',
+        "translation": 'Não se preocupe',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": "Don't mention it",
+        "translation": 'Não há de quê',
+        "category": 'Pedidos e educação',
+    },
+    {
+        "word": 'I usually wake up at...',
+        "translation": 'Eu geralmente acordo às...',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I get up early',
+        "translation": 'Eu levanto cedo',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I go to work',
+        "translation": 'Eu vou trabalhar',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I go to school',
+        "translation": 'Eu vou à escola',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I get home late',
+        "translation": 'Chego em casa tarde',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I have breakfast',
+        "translation": 'Eu tomo café da manhã',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I take a shower',
+        "translation": 'Eu tomo banho',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I get dressed',
+        "translation": 'Eu me visto',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I brush my teeth',
+        "translation": 'Eu escovo os dentes',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I make my bed',
+        "translation": 'Eu arrumo minha cama',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I do the dishes',
+        "translation": 'Eu lavo a louça',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I do the laundry',
+        "translation": 'Eu lavo as roupas',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I clean my room',
+        "translation": 'Eu limpo meu quarto',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I take a break',
+        "translation": 'Eu faço uma pausa',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I go to bed',
+        "translation": 'Eu vou dormir',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I stay up late',
+        "translation": 'Eu fico acordado até tarde',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I work out',
+        "translation": 'Eu faço exercícios',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I spend time with...',
+        "translation": 'Eu passo tempo com...',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": "I'm in a hurry",
+        "translation": 'Estou com pressa',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": "I'm running late",
+        "translation": 'Estou atrasado(a)',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I usually have lunch at...',
+        "translation": 'Geralmente almoço às...',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I leave home at...',
+        "translation": 'Saio de casa às...',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I arrive at work at...',
+        "translation": 'Chego ao trabalho às...',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I come back home',
+        "translation": 'Volto para casa',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I spend the day...',
+        "translation": 'Passo o dia...',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I have to get ready',
+        "translation": 'Tenho que me arrumar',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I need to hurry up',
+        "translation": 'Preciso me apressar',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I forgot to...',
+        "translation": 'Esqueci de...',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I remember doing that',
+        "translation": 'Lembro de ter feito isso',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I need to do the shopping',
+        "translation": 'Preciso fazer compras',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I take the bus',
+        "translation": 'Eu pego o ônibus',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I drive to work',
+        "translation": 'Vou de carro para o trabalho',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I walk to school',
+        "translation": 'Vou a pé para a escola',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I work from home',
+        "translation": 'Trabalho de casa',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'I have some free time',
+        "translation": 'Tenho algum tempo livre',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": "I'm busy today",
+        "translation": 'Estou ocupado(a) hoje',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": "I'm free tomorrow",
+        "translation": 'Estou livre amanhã',
+        "category": 'Rotina e hábitos',
+    },
+    {
+        "word": 'Once in a while',
+        "translation": 'De vez em quando',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'From time to time',
+        "translation": 'De tempos em tempos',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'Every now and then',
+        "translation": 'De vez em quando',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'All the time',
+        "translation": 'O tempo todo',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'Most of the time',
+        "translation": 'Na maior parte do tempo',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'At the moment',
+        "translation": 'No momento',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'Right now',
+        "translation": 'Agora mesmo',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'In a minute',
+        "translation": 'Em um minuto',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'In a few minutes',
+        "translation": 'Em alguns minutos',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'As soon as possible',
+        "translation": 'O mais rápido possível',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'For a long time',
+        "translation": 'Por muito tempo',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'A long time ago',
+        "translation": 'Há muito tempo',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'So far',
+        "translation": 'Até agora',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'Not yet',
+        "translation": 'Ainda não',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'Already done',
+        "translation": 'Já está feito',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'At first',
+        "translation": 'No começo',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'In the end',
+        "translation": 'No final',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'These days',
+        "translation": 'Hoje em dia',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'Once a week',
+        "translation": 'Uma vez por semana',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'Twice a day',
+        "translation": 'Duas vezes por dia',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'Every single day',
+        "translation": 'Todos os dias',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'Every other day',
+        "translation": 'Dia sim, dia não',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'For now',
+        "translation": 'Por enquanto',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'From now on',
+        "translation": 'De agora em diante',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'Sooner or later',
+        "translation": 'Mais cedo ou mais tarde',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'Day by day',
+        "translation": 'Dia após dia',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'All day long',
+        "translation": 'O dia inteiro',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'Throughout the week',
+        "translation": 'Ao longo da semana',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'At the end of the day',
+        "translation": 'No fim das contas / no fim do dia',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'In the meantime',
+        "translation": 'Enquanto isso',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'A few days ago',
+        "translation": 'Há alguns dias',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'The other day',
+        "translation": 'Outro dia',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'The day before yesterday',
+        "translation": 'Anteontem',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'The day after tomorrow',
+        "translation": 'Depois de amanhã',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'In the near future',
+        "translation": 'Num futuro próximo',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'For the time being',
+        "translation": 'Por enquanto',
+        "category": 'Tempo e frequência',
+    },
+    {
+        "word": 'I feel like...',
+        "translation": 'Estou com vontade de...',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": "I'm afraid so",
+        "translation": 'Receio que sim',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": "I'm afraid not",
+        "translation": 'Receio que não',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": "I'm not sure",
+        "translation": 'Não tenho certeza',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": "I'm sure about it",
+        "translation": 'Tenho certeza disso',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": "I'm happy for you",
+        "translation": 'Fico feliz por você',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": "I'm proud of you",
+        "translation": 'Tenho orgulho de você',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": "I'm worried about...",
+        "translation": 'Estou preocupado(a) com...',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": "I'm looking forward to it",
+        "translation": 'Estou ansioso(a) por isso',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": 'That makes me happy',
+        "translation": 'Isso me deixa feliz',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": "I'm not in the mood",
+        "translation": 'Não estou no clima / sem vontade',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": "I can't wait",
+        "translation": 'Mal posso esperar',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": 'It depends',
+        "translation": 'Depende',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": "I don't mind",
+        "translation": 'Eu não me importo',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": 'I feel better',
+        "translation": 'Estou me sentindo melhor',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": 'That was disappointing',
+        "translation": 'Isso foi decepcionante',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": 'What a shame',
+        "translation": 'Que pena',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": "That's amazing",
+        "translation": 'Isso é incrível',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": "I'm exhausted",
+        "translation": 'Estou exausto(a)',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": "I'm used to it",
+        "translation": 'Estou acostumado(a) com isso',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": "I couldn't agree more",
+        "translation": 'Concordo plenamente',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": "I'm not convinced",
+        "translation": 'Não estou convencido(a)',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": 'That sounds interesting',
+        "translation": 'Isso parece interessante',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": 'I have mixed feelings',
+        "translation": 'Tenho sentimentos contraditórios',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": "I'm disappointed with...",
+        "translation": 'Estou decepcionado(a) com...',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": "I'm excited about...",
+        "translation": 'Estou animado(a) com...',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": "I'm getting tired",
+        "translation": 'Estou ficando cansado(a)',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": "I'm having a good time",
+        "translation": 'Estou me divertindo',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": "I'm having a hard time",
+        "translation": 'Estou passando por dificuldades',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": 'It drives me crazy',
+        "translation": 'Isso me deixa louco(a)',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": "I'm fed up with...",
+        "translation": 'Estou cansado(a) de...',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": "I can't stand...",
+        "translation": 'Não suporto...',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": "I'm fond of...",
+        "translation": 'Gosto muito de...',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": "I'm interested in...",
+        "translation": 'Estou interessado(a) em...',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": "I'm worried that...",
+        "translation": 'Estou preocupado(a) que...',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": 'I hope so',
+        "translation": 'Espero que sim',
+        "category": 'Opiniões e sentimentos',
+    },
+    {
+        "word": 'I have a question',
+        "translation": 'Tenho uma pergunta',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": "I don't understand",
+        "translation": 'Eu não entendo',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": 'I understand now',
+        "translation": 'Agora eu entendi',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": 'How do you say...?',
+        "translation": 'Como se diz...?',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": 'What does ... mean?',
+        "translation": 'O que ... significa?',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": 'How do you spell that?',
+        "translation": 'Como se soletra isso?',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": 'Could you explain it?',
+        "translation": 'Você poderia explicar?',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": 'Let me think',
+        "translation": 'Deixe-me pensar',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": 'I need more practice',
+        "translation": 'Preciso praticar mais',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": "I'm learning English",
+        "translation": 'Estou aprendendo inglês',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": 'I made a mistake',
+        "translation": 'Cometi um erro',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": 'Can you give me an example?',
+        "translation": 'Pode me dar um exemplo?',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": "Let's try again",
+        "translation": 'Vamos tentar novamente',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": 'I got it',
+        "translation": 'Entendi',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": 'I forgot the word',
+        "translation": 'Esqueci a palavra',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": 'How do you pronounce it?',
+        "translation": 'Como se pronuncia?',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": "What's the difference?",
+        "translation": 'Qual é a diferença?',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": 'It is spelled...',
+        "translation": 'É escrito / soletrado...',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": "I'm getting better",
+        "translation": 'Estou melhorando',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": 'Keep practicing',
+        "translation": 'Continue praticando',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": 'Could you say that again?',
+        "translation": 'Poderia dizer isso novamente?',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": 'Can you write it down?',
+        "translation": 'Pode escrever isso?',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": 'I need to look it up',
+        "translation": 'Preciso pesquisar isso',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": 'I learned something new',
+        "translation": 'Aprendi algo novo',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": 'I have to study',
+        "translation": 'Tenho que estudar',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": 'I need to review this',
+        "translation": 'Preciso revisar isso',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": "Let's go over it",
+        "translation": 'Vamos revisar isso',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": "I didn't catch that",
+        "translation": 'Não entendi / não ouvi isso',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": 'What was that?',
+        "translation": 'O que foi isso?',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": 'I have trouble with...',
+        "translation": 'Tenho dificuldade com...',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": "I'm good at...",
+        "translation": 'Sou bom/boa em...',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": "I'm not good at...",
+        "translation": 'Não sou bom/boa em...',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": 'I made progress',
+        "translation": 'Fiz progresso',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": 'I need to improve',
+        "translation": 'Preciso melhorar',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": 'Practice makes perfect',
+        "translation": 'A prática leva à perfeição',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": 'Take your time',
+        "translation": 'Não tenha pressa',
+        "category": 'Estudo e aprendizado',
+    },
+    {
+        "word": "I'm at work",
+        "translation": 'Estou no trabalho',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": "I'm on my way",
+        "translation": 'Estou a caminho',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": "I'll be there soon",
+        "translation": 'Estarei aí em breve',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": "I'm available",
+        "translation": 'Estou disponível',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": "I'm busy right now",
+        "translation": 'Estou ocupado(a) agora',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": "Let's have a meeting",
+        "translation": 'Vamos fazer uma reunião',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": 'Can we talk later?',
+        "translation": 'Podemos conversar mais tarde?',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": "I'll get back to you",
+        "translation": 'Retorno o contato com você',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": "I'll take care of it",
+        "translation": 'Vou cuidar disso',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": 'Let me check',
+        "translation": 'Deixe-me verificar',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": "I'm working on it",
+        "translation": 'Estou trabalhando nisso',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": "What's the deadline?",
+        "translation": 'Qual é o prazo?',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": "I'm running out of time",
+        "translation": 'Estou ficando sem tempo',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": 'That works for me',
+        "translation": 'Por mim, tudo bem',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": 'Keep me updated',
+        "translation": 'Mantenha-me informado(a)',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": "I'll let you know",
+        "translation": 'Vou avisar você',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": 'Could you send me...?',
+        "translation": 'Você poderia me enviar...?',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": 'I have a day off',
+        "translation": 'Tenho um dia de folga',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": "I'm looking for a job",
+        "translation": 'Estou procurando emprego',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": "Let's get started",
+        "translation": 'Vamos começar',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": "I'm working late today",
+        "translation": 'Vou trabalhar até tarde hoje',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": 'I have a lot to do',
+        "translation": 'Tenho muita coisa para fazer',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": "I'm almost done",
+        "translation": 'Estou quase terminando',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": "I'll finish it today",
+        "translation": 'Vou terminar isso hoje',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": 'Could you take a look?',
+        "translation": 'Poderia dar uma olhada?',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": "Let's discuss this",
+        "translation": 'Vamos discutir isso',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": "I'll send it over",
+        "translation": 'Vou enviar isso',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": 'Please find attached...',
+        "translation": 'Segue em anexo...',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": "I'm following up on...",
+        "translation": 'Estou acompanhando...',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": 'Thanks for the update',
+        "translation": 'Obrigado(a) pela atualização',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": "I'm stuck on...",
+        "translation": 'Estou travado(a) em...',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": 'We need to figure it out',
+        "translation": 'Precisamos encontrar uma solução',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": "Let's set a date",
+        "translation": 'Vamos marcar uma data',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": 'Are you free this afternoon?',
+        "translation": 'Você está livre hoje à tarde?',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": 'I have an appointment',
+        "translation": 'Tenho um compromisso',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": 'I need to reschedule',
+        "translation": 'Preciso remarcar',
+        "category": 'Trabalho e compromissos',
+    },
+    {
+        "word": 'How much is it?',
+        "translation": 'Quanto custa?',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": 'How much does it cost?',
+        "translation": 'Quanto isso custa?',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": "I'm just looking",
+        "translation": 'Estou só olhando',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": 'Do you have this in...?',
+        "translation": 'Você tem isso em...?',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": "I'm looking for...",
+        "translation": 'Estou procurando...',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": 'Can I try it on?',
+        "translation": 'Posso experimentar?',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": 'Do you accept cards?',
+        "translation": 'Vocês aceitam cartão?',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": 'Can I pay in cash?',
+        "translation": 'Posso pagar em dinheiro?',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": "That's too expensive",
+        "translation": 'Isso é caro demais',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": "It's on sale",
+        "translation": 'Está em promoção',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": 'Can I get a receipt?',
+        "translation": 'Pode me dar um recibo?',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": 'Where can I find...?',
+        "translation": 'Onde posso encontrar...?',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": "I'm ready to order",
+        "translation": 'Estou pronto(a) para pedir',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": "I'd like the menu",
+        "translation": 'Eu gostaria do cardápio',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": 'Can I have the same?',
+        "translation": 'Posso pedir o mesmo?',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": 'Keep the change',
+        "translation": 'Fique com o troco',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": 'Could I have some water?',
+        "translation": 'Poderia me trazer água?',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": 'Is service included?',
+        "translation": 'O serviço está incluído?',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": "I'm allergic to...",
+        "translation": 'Tenho alergia a...',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": 'Could we have a table for two?',
+        "translation": 'Uma mesa para dois, por favor',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": 'Can I see that one?',
+        "translation": 'Posso ver aquele(a)?',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": 'Do you have a smaller size?',
+        "translation": 'Você tem um tamanho menor?',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": 'Do you have a larger size?',
+        "translation": 'Você tem um tamanho maior?',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": "I'm looking for something cheaper",
+        "translation": 'Estou procurando algo mais barato',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": 'Can I return this?',
+        "translation": 'Posso devolver isto?',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": 'Can I exchange it?',
+        "translation": 'Posso trocar isto?',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": 'Where is the fitting room?',
+        "translation": 'Onde fica o provador?',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": "I'll take it",
+        "translation": 'Vou levar',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": "I'm still deciding",
+        "translation": 'Ainda estou decidindo',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": 'Is there a discount?',
+        "translation": 'Tem desconto?',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": 'Can I pay by card?',
+        "translation": 'Posso pagar com cartão?',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": 'The card was declined',
+        "translation": 'O cartão foi recusado',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": 'Could I get a bag?',
+        "translation": 'Pode me dar uma sacola?',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": "It's out of stock",
+        "translation": 'Está esgotado',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": 'When will it be available?',
+        "translation": 'Quando estará disponível?',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": 'Can you recommend something?',
+        "translation": 'Pode recomendar alguma coisa?',
+        "category": 'Compras e serviços',
+    },
+    {
+        "word": 'Where is the nearest...?',
+        "translation": 'Onde fica o ... mais próximo?',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'How do I get there?',
+        "translation": 'Como chego lá?',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'Is it far from here?',
+        "translation": 'É longe daqui?',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'Go straight ahead',
+        "translation": 'Siga em frente',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'Turn left',
+        "translation": 'Vire à esquerda',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'Turn right',
+        "translation": 'Vire à direita',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'Across the street',
+        "translation": 'Do outro lado da rua',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'Next to the bank',
+        "translation": 'Ao lado do banco',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": "I'm lost",
+        "translation": 'Estou perdido(a)',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'I need a taxi',
+        "translation": 'Preciso de um táxi',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'Where is the bus stop?',
+        "translation": 'Onde fica o ponto de ônibus?',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'What time does it leave?',
+        "translation": 'Que horas sai?',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": "I'd like to book a room",
+        "translation": 'Gostaria de reservar um quarto',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'I have a reservation',
+        "translation": 'Tenho uma reserva',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'Can I check in?',
+        "translation": 'Posso fazer o check-in?',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'What time is check-out?',
+        "translation": 'Que horas é o check-out?',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'Where is the restroom?',
+        "translation": 'Onde fica o banheiro?',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'How long does it take?',
+        "translation": 'Quanto tempo demora?',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'I missed the bus',
+        "translation": 'Perdi o ônibus',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'Have a safe trip',
+        "translation": 'Tenha uma boa viagem',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'Which way should I go?',
+        "translation": 'Por qual caminho devo ir?',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'Is this the right way?',
+        "translation": 'Este é o caminho certo?',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'How far is it?',
+        "translation": 'A que distância fica?',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": "It's around the corner",
+        "translation": 'Fica logo ali na esquina',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": "It's on your left",
+        "translation": 'Fica à sua esquerda',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": "It's on your right",
+        "translation": 'Fica à sua direita',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'At the traffic lights',
+        "translation": 'No semáforo',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'At the end of the street',
+        "translation": 'No fim da rua',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'Take the next street',
+        "translation": 'Pegue a próxima rua',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": "I'm here on vacation",
+        "translation": 'Estou aqui de férias',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": "I'm traveling alone",
+        "translation": 'Estou viajando sozinho(a)',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'I need to change trains',
+        "translation": 'Preciso trocar de trem',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'Where is the departure gate?',
+        "translation": 'Onde fica o portão de embarque?',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'My flight was delayed',
+        "translation": 'Meu voo atrasou',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'My luggage is missing',
+        "translation": 'Minha bagagem sumiu',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'Can I see your passport?',
+        "translation": 'Posso ver seu passaporte?',
+        "category": 'Viagens e direções',
+    },
+    {
+        "word": 'In other words',
+        "translation": 'Em outras palavras',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'For example',
+        "translation": 'Por exemplo',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'For instance',
+        "translation": 'Por exemplo',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'On the other hand',
+        "translation": 'Por outro lado',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'On the contrary',
+        "translation": 'Pelo contrário',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'In addition',
+        "translation": 'Além disso',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'Besides that',
+        "translation": 'Além disso',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'Even though',
+        "translation": 'Embora / mesmo que',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'As a result',
+        "translation": 'Como resultado',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'Because of that',
+        "translation": 'Por causa disso',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": "That's why",
+        "translation": 'É por isso que',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'In fact',
+        "translation": 'Na verdade',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'Actually',
+        "translation": 'Na verdade',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'At least',
+        "translation": 'Pelo menos',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'At the same time',
+        "translation": 'Ao mesmo tempo',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'In general',
+        "translation": 'Em geral',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'It turns out that...',
+        "translation": 'Acontece que...',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'As usual',
+        "translation": 'Como de costume',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'No matter what',
+        "translation": 'Não importa o quê',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'As long as...',
+        "translation": 'Desde que...',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'First of all',
+        "translation": 'Antes de tudo',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'After all',
+        "translation": 'Afinal de contas',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'Even so',
+        "translation": 'Mesmo assim',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'For this reason',
+        "translation": 'Por esse motivo',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'That being said',
+        "translation": 'Dito isso',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'To be fair',
+        "translation": 'Para ser justo(a)',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'To some extent',
+        "translation": 'Até certo ponto',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'In my opinion',
+        "translation": 'Na minha opinião',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'From my point of view',
+        "translation": 'Do meu ponto de vista',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'Generally speaking',
+        "translation": 'De modo geral',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'More or less',
+        "translation": 'Mais ou menos',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'One way or another',
+        "translation": 'De um jeito ou de outro',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'In case of...',
+        "translation": 'Em caso de...',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'In case you need...',
+        "translation": 'Caso você precise...',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'As a matter of fact',
+        "translation": 'Na verdade',
+        "category": 'Conectores e expressões comuns',
+    },
+    {
+        "word": 'In the first place',
+        "translation": 'Em primeiro lugar',
+        "category": 'Conectores e expressões comuns',
+    },
+]

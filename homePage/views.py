@@ -7,7 +7,7 @@ from django.shortcuts import render
 from accounts.models import UserProfile
 from accounts.views import login_view
 
-from .vocabulario import PALAVRAS
+from .vocabulario import PALAVRAS, CHUNKS
 
 def homePage(request):
 
@@ -56,3 +56,44 @@ def vocabulario(request):
 			"categoria_selecionada": categoria,
 		},
 	)
+
+
+
+@login_required
+def chunks(request):
+
+    pesquisa = request.GET.get("q", "").strip().casefold()
+    categoria = request.GET.get("categoria", "").strip()
+    categorias = sorted({
+        chunk["category"]
+        for chunk in CHUNKS
+    })
+
+    chunks_filtrados = [
+        chunk
+        for chunk in CHUNKS
+
+        if (
+
+            not pesquisa
+            or pesquisa in chunk["word"].casefold()
+            or pesquisa in chunk["translation"].casefold()
+        )
+
+        and (
+            not categoria
+            or chunk["category"] == categoria
+        )
+    ]
+    return render(
+        request,
+        "chunks.html",
+        {
+            "chunks": chunks_filtrados,
+            "categorias": categorias,
+            "pesquisa": request.GET.get("q", ""),
+            "categoria_selecionada": categoria,
+        },
+    )
+
+ 
