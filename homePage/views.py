@@ -95,5 +95,3 @@ def chunks(request):
             "categoria_selecionada": categoria,
         },
     )
-
- 

@@ -16,8 +16,15 @@ urlpatterns = [
         name="register"
     ),
 
-	path(
-		"vocabulario/",
-		views.vocabulario,
-		name="vocabulario"),
+    path(
+        "vocabulario/",
+        views.vocabulario,
+        name="vocabulario"
+    ),
+
+    path(
+        "chunks/",
+        views.chunks,
+        name="chunks"
+    ),
 ]
