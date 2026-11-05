@@ -23,7 +23,7 @@ jobs:
       - name: TruffleHog Secret Scan
         uses: trufflesecurity/trufflehog@main
         with:
-          extra_args: --only-verified --github-actions
+          extra_args: --only-verified
         continue-on-error: true
 
   sca-scan:
