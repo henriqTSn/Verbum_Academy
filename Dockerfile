@@ -2,20 +2,23 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-# Instala dependências
+# Cria usuário não-root
+RUN groupadd -r appuser && useradd -r -g appuser appuser
+
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copia o código
 COPY . .
+RUN chown -R appuser:appuser /app
 
-# Variáveis de ambiente para CI / desenvolvimento
-ENV DJANGO_SECRET_KEY=devsecretkeyforci
-ENV VERBUM_ENCRYPTION_KEY=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+# Valores padrão apenas para desenvolvimento/CI (não são segredos reais)
+ENV DJANGO_SECRET_KEY=dev-secret-key-change-me
+ENV VERBUM_ENCRYPTION_KEY=dev-encryption-key-change-me
 ENV DEBUG=True
 ENV PYTHONUNBUFFERED=1
 
 EXPOSE 8000
 
-# Migra e inicia o servidor
+USER appuser
+
 CMD ["sh", "-c", "python manage.py migrate --noinput && python manage.py runserver 0.0.0.0:8000"]
