@@ -24,7 +24,6 @@ jobs:
         uses: trufflesecurity/trufflehog@main
         with:
           extra_args: --only-verified --github-actions
-        continue-on-error: true
 
   sca-scan:
     name: SCA - Vulnerability Scan (Trivy)
