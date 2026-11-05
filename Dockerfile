@@ -7,9 +7,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-# Valores que não parecem segredos reais
-ENV DJANGO_SECRET_KEY=dev-secret-key-change-me
-ENV VERBUM_ENCRYPTION_KEY=dev-encryption-key-change-me
+ENV DJANGO_SECRET_KEY=devsecretkeyforci
+ENV VERBUM_ENCRYPTION_KEY=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 ENV DEBUG=True
 ENV PYTHONUNBUFFERED=1
 
