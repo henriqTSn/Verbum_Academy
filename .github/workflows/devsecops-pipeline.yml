@@ -20,12 +20,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: TruffleHog Secret Scan
-        # Recomendado: fixar em uma tag/SHA em vez de @main (risco de supply chain)
-        uses: trufflesecurity/trufflehog@main
-        with:
-          extra_args: --only-verified --fail
-        # continue-on-error removido: agora o job falha se achar segredo verificado
+      - name: Install TruffleHog
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh | sh -s -- -b /usr/local/bin
+
+      - name: TruffleHog Secret Scan (full git history)
+        run: |
+          trufflehog git file://. --only-verified --fail --no-update
 
   sca-scan:
     name: SCA - Vulnerability Scan (Trivy)
@@ -65,4 +66,3 @@ jobs:
             --exclude .git \
             --severity ERROR \
             --error
-        # "|| true" removido: --error faz o job falhar quando há findings ERROR
