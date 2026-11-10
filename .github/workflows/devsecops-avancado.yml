@@ -21,7 +21,11 @@ jobs:
       - name: Build e sobe a aplicação com Docker
         run: |
           docker build -t verbum-academy:ci .
-          docker run -d --name verbum-app -p 8000:8000 verbum-academy:ci
+          docker run -d --name verbum-app -p 8000:8000 \
+            -e DJANGO_SECRET_KEY=devsecretkeyforci \
+            -e VERBUM_ENCRYPTION_KEY=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA= \
+            -e DEBUG=True \
+            verbum-academy:ci
           echo "Aguardando a aplicação ficar disponível..."
           for i in $(seq 1 50); do
             if curl -sf http://localhost:8000/ > /dev/null; then
